@@ -47,7 +47,7 @@ public class GeneticTransposerBlockEntity extends TilePowered implements IHintTi
 		// Check for room in result slot
 		ItemStack copy = this.inventory.getItem(GeneticTransposerInventory.SLOT_SOURCE).copyWithCount(1);
 		ItemStack output = this.inventory.getItem(GeneticTransposerInventory.SLOT_OUTPUT);
-		if (!output.isEmpty() && !ItemHandlerHelper.canItemStacksStack(output, copy)) {
+		if (!output.isEmpty() && !ItemStack.isSameItemSameComponents(output, copy)) {
 			return false;
 		}
 		// Consume inputs
