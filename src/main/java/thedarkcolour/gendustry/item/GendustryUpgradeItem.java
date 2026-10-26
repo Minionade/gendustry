@@ -7,7 +7,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.Level;
 
 import org.jetbrains.annotations.Nullable;
 import thedarkcolour.gendustry.data.TranslationKeys;
@@ -24,7 +23,7 @@ public class GendustryUpgradeItem extends Item {
 	}
 
 	@Override
-	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag advanced) {
+	public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag advanced) {
 		if (this.descriptionKey == null) {
 			this.descriptionKey = getOrCreateDescriptionId() + ".tooltip";
 		}
