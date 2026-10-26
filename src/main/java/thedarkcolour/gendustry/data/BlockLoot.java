@@ -23,7 +23,7 @@ class BlockLoot extends BlockLootSubProvider {
 
 	@Override
 	protected void generate() {
-		for (GendustryMachineBlock block : GBlocks.MACHINE.getBlocks()) {
+		for (GendustryMachineBlock block : GBlocks.MACHINE.getList()) {
 			dropSelf(block);
 		}
 	}
