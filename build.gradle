@@ -163,7 +163,7 @@ if (System.getenv('CURSEFORGE_TOKEN')) {
 			addGameVersion('NeoForge')
 			addGameVersion('Java 21')
 
-			mainArtifact(reobfJar.archiveFile) {
+			mainArtifact(jar.archiveFile) {
 				displayName = "Gendustry: Community Edition ${project.version}"
 				relations {
 					requiredDependency 'forestry-community-edition'
@@ -183,7 +183,7 @@ modrinth {
 	loaders = ['neoforge']
 	changelog = getChangelog(project.version)
 
-	uploadFile = reobfJar
+	uploadFile = jar
 
 	dependencies {
 		required.project('forestry-community-edition')
