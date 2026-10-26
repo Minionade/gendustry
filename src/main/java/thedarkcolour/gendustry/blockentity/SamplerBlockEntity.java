@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import forestry.api.core.ForestryError;
 import forestry.api.core.IErrorLogic;
-import forestry.api.genetics.alleles.AllelePair;
-import forestry.api.genetics.alleles.IAllele;
-import forestry.api.genetics.alleles.IChromosome;
-import forestry.api.genetics.capability.IIndividualHandlerItem;
-import forestry.core.tiles.TilePowered;
+import forestry.api.core.genetics.alleles.AllelePair;
+import forestry.api.core.genetics.alleles.Allele;
+import forestry.api.core.genetics.alleles.IChromosome;
+import forestry.api.core.genetics.capability.IIndividualHandlerItem;
+import forestry.core.platform.tile.TilePowered;
 
 import thedarkcolour.gendustry.compat.forestry.GendustryError;
 import thedarkcolour.gendustry.item.GeneSampleItem;
@@ -26,7 +26,7 @@ import thedarkcolour.gendustry.registry.GBlockEntities;
 
 public class SamplerBlockEntity extends TilePowered implements IHintTile {
 	private static final int ENERGY_PER_WORK_CYCLE = 20000;
-	private static final int TICKS_PER_WORK_CYCLE = 20;
+	private static final int STEPS_PER_WORK_CYCLE = 4;
 
 	public static final String HINTS_KEY = "gendustry.sampler";
 
@@ -38,7 +38,7 @@ public class SamplerBlockEntity extends TilePowered implements IHintTile {
 		this.inventory = new SamplerInventory(this);
 
 		setInternalInventory(this.inventory);
-		setTicksPerWorkCycle(TICKS_PER_WORK_CYCLE);
+		setStepsPerWorkCycle(STEPS_PER_WORK_CYCLE);
 		setEnergyPerWorkCycle(ENERGY_PER_WORK_CYCLE);
 	}
 
@@ -66,7 +66,7 @@ public class SamplerBlockEntity extends TilePowered implements IHintTile {
 			RandomSource random = this.level.random;
 			Map.Entry<IChromosome<?>, AllelePair<?>> randomEntry = Util.getRandom(individual.getGenome().getChromosomes().entrySet().asList(), random);
 			AllelePair<?> randomPair = randomEntry.getValue();
-			IAllele chosenAllele = random.nextBoolean() ? randomPair.active() : randomPair.inactive();
+			Allele<?> chosenAllele = random.nextBoolean() ? randomPair.active() : randomPair.inactive();
 
 			this.inventory.setItem(SamplerInventory.SLOT_OUTPUT, GeneSampleItem.createStack(individual.getType(), randomEntry.getKey(), chosenAllele));
 

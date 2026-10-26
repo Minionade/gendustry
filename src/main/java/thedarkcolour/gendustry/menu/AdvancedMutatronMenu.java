@@ -11,11 +11,11 @@ import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 
-import forestry.api.genetics.IIndividual;
-import forestry.api.genetics.ILifeStage;
-import forestry.api.genetics.IMutation;
-import forestry.api.genetics.ISpecies;
-import forestry.core.tiles.TileUtil;
+import forestry.api.core.genetics.IIndividual;
+import forestry.api.core.genetics.ILifeStage;
+import forestry.api.core.genetics.IMutation;
+import forestry.api.core.genetics.ISpecies;
+import forestry.core.platform.tile.TileUtil;
 
 import org.jetbrains.annotations.Nullable;
 import thedarkcolour.gendustry.blockentity.AbstractMutatronBlockEntity;
@@ -83,14 +83,9 @@ public class AdvancedMutatronMenu extends AbstractMutatronMenu<AdvancedMutatronB
 				IIndividual individual = mutation.getResult().createIndividual(AbstractMutatronBlockEntity.createMutatedGenome(mutation));
 				return individual.createStack(stage);
 			}).toList();
-			for (int i = 0; i < this.icons.size(); ++i) {
-				this.choices[i].set(this.icons.get(i));
-			}
-			for (int i = this.icons.size(); i < 4; ++i) {
-				this.choices[i].set(ItemStack.EMPTY);
-			}
 
 			setPossibilityCount(this.possibilities.size());
+			updateChoiceSlots();
 		}
 
 		super.broadcastChanges();
@@ -134,7 +129,17 @@ public class AdvancedMutatronMenu extends AbstractMutatronMenu<AdvancedMutatronB
 	}
 
 	public void setOffset(int offset) {
-		this.data.set(1, offset);
+		int maxOffset = Math.max(0, getPossibilityCount() - this.choices.length);
+		this.data.set(1, Math.max(0, Math.min(offset, maxOffset)));
+		updateChoiceSlots();
+	}
+
+	private void updateChoiceSlots() {
+		int offset = getOffset();
+		for (int slot = 0; slot < this.choices.length; ++slot) {
+			int possibility = offset + slot;
+			this.choices[slot].set(possibility < this.icons.size() ? this.icons.get(possibility) : ItemStack.EMPTY);
+		}
 	}
 
 	public int getSelected() {
@@ -146,7 +151,7 @@ public class AdvancedMutatronMenu extends AbstractMutatronMenu<AdvancedMutatronB
 
 		if (selected >= 0 && !this.tile.getLevel().isClientSide) {
 			List<IMutation<ISpecies<?>>> possibilities = this.tile.getPossibilities();
-			int choice = getSelected() + getOffset();
+			int choice = getSelected();
 
 			if (choice < possibilities.size()) {
 				this.tile.setCurrentMutation(possibilities.get(choice), this.tile.getItem(MutatronInventory.SLOT_PRIMARY), this.tile.getItem(MutatronInventory.SLOT_SECONDARY));

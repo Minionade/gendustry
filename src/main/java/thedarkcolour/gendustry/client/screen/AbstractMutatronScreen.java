@@ -7,8 +7,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
-import forestry.core.gui.GuiForestryTitled;
-import forestry.core.gui.widgets.TankWidget;
+import forestry.core.platform.gui.GuiForestryTitled;
+import forestry.core.platform.gui.widgets.TankWidget;
 
 import thedarkcolour.gendustry.blockentity.AbstractMutatronBlockEntity;
 import thedarkcolour.gendustry.data.TranslationKeys;

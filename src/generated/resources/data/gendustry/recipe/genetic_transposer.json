@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": {
+      "tag": "c:gears/bronze"
+    },
+    "H": {
+      "item": "gendustry:genetics_processor"
+    },
+    "I": {
+      "tag": "c:ingots/bronze"
+    },
+    "M": {
+      "item": "gendustry:power_module"
+    },
+    "S": {
+      "item": "forestry:sturdy_machine"
+    }
+  },
+  "pattern": [
+    "GIG",
+    "HSH",
+    "GMG"
+  ],
+  "result": {
+    "item": "gendustry:genetic_transposer"
+  },
+  "show_notification": true
+}

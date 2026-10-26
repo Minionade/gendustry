@@ -1,0 +1,7 @@
+{
+  "type": "gendustry:dna",
+  "amount": 300,
+  "species_type": "forestry:bee_species",
+  "stage": "larvae",
+  "id": "gendustry:dna/larvae"
+}

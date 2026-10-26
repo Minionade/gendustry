@@ -3,8 +3,8 @@ package thedarkcolour.gendustry.blockentity;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
 
-import forestry.core.fluids.FluidHelper;
-import forestry.core.inventory.InventoryAdapterTile;
+import forestry.core.platform.fluids.FluidHelper;
+import forestry.core.platform.inventory.InventoryAdapterTile;
 
 import thedarkcolour.gendustry.item.GendustryResourceType;
 import thedarkcolour.gendustry.registry.GItems;

@@ -1,17 +1,19 @@
 package thedarkcolour.gendustry.recipe;
 
-import com.google.gson.JsonObject;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 
 import thedarkcolour.gendustry.registry.GRecipeTypes;
-import org.jetbrains.annotations.Nullable;
 
 public class MutagenRecipe extends ProcessorRecipe {
 	private final Ingredient ingredient;
@@ -41,25 +43,32 @@ public class MutagenRecipe extends ProcessorRecipe {
 	}
 
 	public static class Serializer implements RecipeSerializer<MutagenRecipe> {
-		@Override
-		public MutagenRecipe fromJson(ResourceLocation id, JsonObject json) {
-			Ingredient ingredient = Ingredient.fromJson(json.get("ingredient"));
-			int amount = GsonHelper.getAsInt(json, "amount");
+		private static final MapCodec<MutagenRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+			ResourceLocation.CODEC.fieldOf("id").forGetter(MutagenRecipe::getId),
+			Ingredient.CODEC_NONEMPTY.fieldOf("ingredient").forGetter(MutagenRecipe::getIngredient),
+			Codec.INT.fieldOf("amount").forGetter(MutagenRecipe::getAmount)
+		).apply(instance, MutagenRecipe::new));
+		private static final StreamCodec<RegistryFriendlyByteBuf, MutagenRecipe> STREAM_CODEC = StreamCodec.of(
+			(buffer, recipe) -> {
+				ResourceLocation.STREAM_CODEC.encode(buffer, recipe.getId());
+				Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, recipe.ingredient);
+				ByteBufCodecs.VAR_INT.encode(buffer, recipe.amount);
+			},
+			buffer -> new MutagenRecipe(
+				ResourceLocation.STREAM_CODEC.decode(buffer),
+				Ingredient.CONTENTS_STREAM_CODEC.decode(buffer),
+				ByteBufCodecs.VAR_INT.decode(buffer)
+			)
+		);
 
-			return new MutagenRecipe(id, ingredient, amount);
+		@Override
+		public MapCodec<MutagenRecipe> codec() {
+			return CODEC;
 		}
 
 		@Override
-		public @Nullable MutagenRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf data) {
-			Ingredient ingredient = Ingredient.fromNetwork(data);
-			int amount = data.readShort();
-			return new MutagenRecipe(id, ingredient, amount);
-		}
-
-		@Override
-		public void toNetwork(FriendlyByteBuf data, MutagenRecipe recipe) {
-			recipe.ingredient.toNetwork(data);
-			data.writeShort(recipe.amount);
+		public StreamCodec<RegistryFriendlyByteBuf, MutagenRecipe> streamCodec() {
+			return STREAM_CODEC;
 		}
 	}
 }

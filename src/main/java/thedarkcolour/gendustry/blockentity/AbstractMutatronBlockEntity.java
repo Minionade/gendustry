@@ -15,23 +15,23 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
-import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 
 import forestry.api.IForestryApi;
 import forestry.api.core.IErrorLogic;
-import forestry.api.genetics.IBreedingTracker;
-import forestry.api.genetics.IGenome;
-import forestry.api.genetics.IIndividual;
-import forestry.api.genetics.IMutation;
-import forestry.api.genetics.ISpecies;
-import forestry.api.genetics.ISpeciesType;
-import forestry.api.genetics.alleles.AllelePair;
-import forestry.api.genetics.alleles.IChromosome;
-import forestry.api.genetics.alleles.IKaryotype;
-import forestry.api.genetics.capability.IIndividualHandlerItem;
+import forestry.api.core.genetics.IBreedingTracker;
+import forestry.api.core.genetics.IGenome;
+import forestry.api.core.genetics.IIndividual;
+import forestry.api.core.genetics.IMutation;
+import forestry.api.core.genetics.ISpecies;
+import forestry.api.core.genetics.ISpeciesType;
+import forestry.api.core.genetics.alleles.AllelePair;
+import forestry.api.core.genetics.alleles.IChromosome;
+import forestry.api.core.genetics.alleles.IKaryotype;
+import forestry.api.core.genetics.capability.IIndividualHandlerItem;
 import forestry.api.plugin.IGenomeBuilder;
-import forestry.core.fluids.FilteredTank;
-import forestry.core.fluids.FluidHelper;
+import forestry.core.platform.fluids.FilteredTank;
+import forestry.core.platform.fluids.FluidHelper;
 
 import org.jetbrains.annotations.Nullable;
 import thedarkcolour.gendustry.compat.forestry.GendustryError;
@@ -42,7 +42,7 @@ import thedarkcolour.gendustry.registry.GFluids;
 
 public abstract class AbstractMutatronBlockEntity extends PoweredTankBlockEntity {
 	private static final int ENERGY_PER_WORK_CYCLE = 100000;
-	private static final int TICKS_PER_WORK_CYCLE = 40;
+	private static final int STEPS_PER_WORK_CYCLE = 8;
 
 	public static final String HINTS_KEY = "gendustry.mutatron";
 
@@ -66,7 +66,7 @@ public abstract class AbstractMutatronBlockEntity extends PoweredTankBlockEntity
 		this.isAdvanced = type == GBlockEntities.ADVANCED_MUTATRON.tileType();
 
 		setInternalInventory(this.inventory);
-		setTicksPerWorkCycle(TICKS_PER_WORK_CYCLE);
+		setStepsPerWorkCycle(STEPS_PER_WORK_CYCLE);
 		setEnergyPerWorkCycle(ENERGY_PER_WORK_CYCLE);
 	}
 

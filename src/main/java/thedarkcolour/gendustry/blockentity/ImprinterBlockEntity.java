@@ -11,12 +11,12 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import forestry.api.core.ForestryError;
 import forestry.api.core.IErrorLogic;
-import forestry.api.genetics.IGenome;
-import forestry.api.genetics.IIndividual;
-import forestry.api.genetics.alleles.IAllele;
-import forestry.api.genetics.alleles.IChromosome;
-import forestry.api.genetics.capability.IIndividualHandlerItem;
-import forestry.core.tiles.TilePowered;
+import forestry.api.core.genetics.IGenome;
+import forestry.api.core.genetics.IIndividual;
+import forestry.api.core.genetics.alleles.Allele;
+import forestry.api.core.genetics.alleles.IChromosome;
+import forestry.api.core.genetics.capability.IIndividualHandlerItem;
+import forestry.core.platform.tile.TilePowered;
 
 import thedarkcolour.gendustry.compat.forestry.GendustryError;
 import thedarkcolour.gendustry.item.GeneticTemplateItem;
@@ -34,7 +34,7 @@ public class ImprinterBlockEntity extends TilePowered implements IHintTile {
 		this.inventory = new ImprinterInventory(this);
 		setInternalInventory(this.inventory);
 
-		setTicksPerWorkCycle(80);
+		setStepsPerWorkCycle(16);
 		setEnergyPerWorkCycle(100000);
 	}
 
@@ -59,7 +59,7 @@ public class ImprinterBlockEntity extends TilePowered implements IHintTile {
 
 		return IIndividualHandlerItem.filter(organism, (individual, stage) -> {
 			ItemStack template = this.inventory.getItem(ImprinterInventory.SLOT_TEMPLATE);
-			Map<IChromosome<?>, IAllele> alleles = GeneticTemplateItem.getAlleles(template);
+			Map<IChromosome<?>, Allele<?>> alleles = GeneticTemplateItem.getAlleles(template);
 			IGenome newGenome = individual.getGenome().copyWith(alleles);
 
 			IIndividual newIndividual = individual.copyWithGenome(newGenome);

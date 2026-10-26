@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": {
+      "tag": "c:gems/diamond"
+    },
+    "I": {
+      "item": "gendustry:blank_gene_sample"
+    },
+    "R": {
+      "tag": "c:dusts/redstone"
+    }
+  },
+  "pattern": [
+    "RIR",
+    "IDI",
+    "RIR"
+  ],
+  "result": {
+    "item": "gendustry:blank_genetic_template"
+  },
+  "show_notification": true
+}

@@ -2,9 +2,9 @@ package thedarkcolour.gendustry.client;
 
 import net.minecraft.client.gui.screens.MenuScreens;
 
-import net.minecraftforge.eventbus.api.IEventBus;
+import net.neoforged.bus.api.IEventBus;
 
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 
 import forestry.api.client.IClientModuleHandler;
 

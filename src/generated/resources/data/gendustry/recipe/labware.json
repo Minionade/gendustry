@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": {
+      "tag": "c:gems/diamond"
+    },
+    "G": {
+      "tag": "c:glass_panes"
+    }
+  },
+  "pattern": [
+    "G G",
+    "G G",
+    " D "
+  ],
+  "result": {
+    "count": 2,
+    "item": "gendustry:labware"
+  },
+  "show_notification": true
+}

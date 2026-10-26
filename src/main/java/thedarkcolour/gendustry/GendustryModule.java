@@ -4,7 +4,10 @@ import java.util.function.Consumer;
 
 import net.minecraft.resources.ResourceLocation;
 
-import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraft.core.Direction;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.bus.api.IEventBus;
 
 import forestry.api.client.IClientModuleHandler;
 import forestry.api.modules.ForestryModule;
@@ -16,6 +19,9 @@ import thedarkcolour.gendustry.recipe.cache.DnaRecipeCache;
 import thedarkcolour.gendustry.recipe.cache.MutagenRecipeCache;
 import thedarkcolour.gendustry.recipe.cache.ProteinRecipeCache;
 import thedarkcolour.gendustry.recipe.cache.RecipeCacheRegistry;
+import thedarkcolour.gendustry.registry.GBlockEntities;
+import thedarkcolour.gendustry.blockentity.IndustrialApiaryBlockEntity;
+import thedarkcolour.gendustry.blockentity.PoweredTankBlockEntity;
 
 @ForestryModule
 public class GendustryModule implements IForestryModule {
@@ -23,6 +29,7 @@ public class GendustryModule implements IForestryModule {
 
 	@Override
 	public void registerEvents(IEventBus modBus) {
+		modBus.addListener(GendustryModule::registerCapabilities);
 		// Recipe caching
 		new RecipeCacheRegistry(registrar -> {
 			registrar.accept(MutagenRecipeCache.INSTANCE);
@@ -34,6 +41,26 @@ public class GendustryModule implements IForestryModule {
             modBus.addListener(Data::gatherData);
         } catch (ClassCastException ignored) {
         }
+	}
+
+	private static void registerCapabilities(RegisterCapabilitiesEvent event) {
+		registerPowered(event, GBlockEntities.MUTAGEN_PRODUCER.tileType());
+		registerPowered(event, GBlockEntities.DNA_EXTRACTOR.tileType());
+		registerPowered(event, GBlockEntities.PROTEIN_LIQUEFIER.tileType());
+		registerPowered(event, GBlockEntities.SAMPLER.tileType());
+		registerPowered(event, GBlockEntities.MUTATRON.tileType());
+		registerPowered(event, GBlockEntities.ADVANCED_MUTATRON.tileType());
+		registerPowered(event, GBlockEntities.IMPRINTER.tileType());
+		registerPowered(event, GBlockEntities.GENETIC_TRANSPOSER.tileType());
+		registerPowered(event, GBlockEntities.REPLICATOR.tileType());
+		event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, GBlockEntities.INDUSTRIAL_APIARY.tileType(), (tile, side) -> tile.getItemHandler(side));
+		event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK, GBlockEntities.INDUSTRIAL_APIARY.tileType(), IndustrialApiaryBlockEntity::getEnergyHandler);
+	}
+
+	private static void registerPowered(RegisterCapabilitiesEvent event, net.minecraft.world.level.block.entity.BlockEntityType<? extends PoweredTankBlockEntity> type) {
+		event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, type, (tile, side) -> tile.getItemHandler(side));
+		event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK, type, (tile, side) -> tile.getEnergyHandler(side));
+		event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, type, (tile, side) -> tile.getTankManager());
 	}
 
 	@Override

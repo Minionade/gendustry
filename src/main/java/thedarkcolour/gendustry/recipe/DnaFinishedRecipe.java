@@ -6,8 +6,8 @@ import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 
-import forestry.api.genetics.ILifeStage;
-import forestry.api.genetics.ISpeciesType;
+import forestry.api.core.genetics.ILifeStage;
+import forestry.api.core.genetics.ISpeciesType;
 
 import thedarkcolour.gendustry.registry.GRecipeTypes;
 import org.jetbrains.annotations.Nullable;
@@ -27,6 +27,7 @@ public class DnaFinishedRecipe implements FinishedRecipe {
 
 	@Override
 	public void serializeRecipeData(JsonObject json) {
+		json.addProperty("id", this.id.toString());
 		json.addProperty("species_type", this.speciesType.id().toString());
 		json.addProperty("stage", this.stage.getSerializedName());
 		json.addProperty("amount", this.amount);

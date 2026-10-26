@@ -10,7 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeManager;
 
-import forestry.core.utils.RecipeUtils;
+import forestry.core.platform.util.RecipeUtils;
 
 import thedarkcolour.gendustry.recipe.MutagenRecipe;
 import thedarkcolour.gendustry.registry.GRecipeTypes;

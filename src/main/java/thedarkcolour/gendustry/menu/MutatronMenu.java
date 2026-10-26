@@ -5,7 +5,7 @@ import java.util.Objects;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 
-import forestry.core.tiles.TileUtil;
+import forestry.core.platform.tile.TileUtil;
 
 import thedarkcolour.gendustry.blockentity.MutatronBlockEntity;
 import thedarkcolour.gendustry.registry.GMenus;

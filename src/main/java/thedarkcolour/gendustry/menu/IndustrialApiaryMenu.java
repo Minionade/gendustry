@@ -7,11 +7,11 @@ import net.minecraft.world.entity.player.Inventory;
 
 import forestry.api.core.HumidityType;
 import forestry.api.core.TemperatureType;
-import forestry.core.gui.ContainerTile;
-import forestry.core.gui.slots.SlotFiltered;
-import forestry.core.gui.slots.SlotOutput;
-import forestry.core.network.packets.PacketGuiStream;
-import forestry.core.tiles.TileUtil;
+import forestry.core.platform.gui.ContainerTile;
+import forestry.core.platform.gui.slots.SlotFiltered;
+import forestry.core.platform.gui.slots.SlotOutput;
+import forestry.core.platform.network.packets.PacketGuiStream;
+import forestry.core.platform.tile.TileUtil;
 
 import thedarkcolour.gendustry.blockentity.IndustrialApiaryBlockEntity;
 import thedarkcolour.gendustry.blockentity.IndustrialApiaryInventory;

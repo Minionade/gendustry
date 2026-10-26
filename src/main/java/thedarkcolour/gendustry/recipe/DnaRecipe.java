@@ -1,21 +1,24 @@
 package thedarkcolour.gendustry.recipe;
 
-import com.google.gson.JsonObject;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.DataResult;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 
 import forestry.api.IForestryApi;
-import forestry.api.genetics.ILifeStage;
-import forestry.api.genetics.ISpeciesType;
-import forestry.api.genetics.capability.IIndividualHandlerItem;
+import forestry.api.core.genetics.ILifeStage;
+import forestry.api.core.genetics.ISpeciesType;
+import forestry.api.core.genetics.capability.IIndividualHandlerItem;
 
 import thedarkcolour.gendustry.registry.GRecipeTypes;
-import org.jetbrains.annotations.Nullable;
 
 public class DnaRecipe extends ProcessorRecipe {
 	private final ISpeciesType<?, ?> speciesType;
@@ -52,53 +55,48 @@ public class DnaRecipe extends ProcessorRecipe {
 	}
 
 	public static class Serializer implements RecipeSerializer<DnaRecipe> {
-		@Override
-		public DnaRecipe fromJson(ResourceLocation id, JsonObject json) {
-			ResourceLocation speciesTypeId = new ResourceLocation(GsonHelper.getAsString(json, "species_type"));
-			String stageName = GsonHelper.getAsString(json, "stage");
-			int amount = GsonHelper.getAsInt(json, "amount");
-
-			ISpeciesType<?, ?> speciesType = IForestryApi.INSTANCE.getGeneticManager().getSpeciesType(speciesTypeId);
-			ILifeStage stage = null;
-			for (ILifeStage s : speciesType.getLifeStages()) {
-				if (s.getSerializedName().equals(stageName)) {
-					stage = s;
-					break;
-				}
+		private static final Codec<ISpeciesType<?, ?>> SPECIES_TYPE_CODEC = ResourceLocation.CODEC.comapFlatMap(
+			id -> {
+				ISpeciesType<?, ?> type = IForestryApi.INSTANCE.getGeneticManager().getSpeciesTypeSafe(id);
+				return type == null ? DataResult.error(() -> "Unknown Forestry species type: " + id) : DataResult.success(type);
+			}, ISpeciesType::id);
+		private static final MapCodec<DnaRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+			ResourceLocation.CODEC.fieldOf("id").forGetter(DnaRecipe::getId),
+			SPECIES_TYPE_CODEC.fieldOf("species_type").forGetter(DnaRecipe::getSpeciesType),
+			Codec.STRING.fieldOf("stage").forGetter(recipe -> recipe.stage.getSerializedName()),
+			Codec.INT.fieldOf("amount").forGetter(DnaRecipe::getAmount)
+		).apply(instance, Serializer::create));
+		private static final StreamCodec<RegistryFriendlyByteBuf, DnaRecipe> STREAM_CODEC = StreamCodec.of(
+			(buffer, recipe) -> {
+				ResourceLocation.STREAM_CODEC.encode(buffer, recipe.getId());
+				ResourceLocation.STREAM_CODEC.encode(buffer, recipe.speciesType.id());
+				ByteBufCodecs.STRING_UTF8.encode(buffer, recipe.stage.getSerializedName());
+				ByteBufCodecs.VAR_INT.encode(buffer, recipe.amount);
+			},
+			buffer -> {
+				ResourceLocation id = ResourceLocation.STREAM_CODEC.decode(buffer);
+				ISpeciesType<?, ?> type = IForestryApi.INSTANCE.getGeneticManager().getSpeciesType(ResourceLocation.STREAM_CODEC.decode(buffer));
+				String stage = ByteBufCodecs.STRING_UTF8.decode(buffer);
+				int amount = ByteBufCodecs.VAR_INT.decode(buffer);
+				return create(id, type, stage, amount);
 			}
-			if (stage == null) {
-				throw new IllegalStateException("No such life stage " + stageName + " for species type " + speciesTypeId);
-			}
+		);
 
-			return new DnaRecipe(id, speciesType, stage, amount);
+		private static DnaRecipe create(ResourceLocation id, ISpeciesType<?, ?> type, String stageName, int amount) {
+			for (ILifeStage stage : type.getLifeStages()) {
+				if (stage.getSerializedName().equals(stageName)) return new DnaRecipe(id, type, stage, amount);
+			}
+			throw new IllegalArgumentException("Unknown life stage '" + stageName + "' for species type " + type.id());
 		}
 
 		@Override
-		public @Nullable DnaRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf data) {
-			ISpeciesType<?, ?> speciesType = IForestryApi.INSTANCE.getGeneticManager().getSpeciesType(data.readResourceLocation());
-
-			// todo LifeStage API needs to be redesigned for better serialization
-			ILifeStage stage = null;
-			String stageName = data.readUtf();
-			for (ILifeStage s : speciesType.getLifeStages()) {
-				if (s.getSerializedName().equals(stageName)) {
-					stage = s;
-					break;
-				}
-			}
-			if (stage == null) {
-				return null;
-			}
-			int amount = data.readShort();
-
-			return new DnaRecipe(id, speciesType, stage, amount);
+		public MapCodec<DnaRecipe> codec() {
+			return CODEC;
 		}
 
 		@Override
-		public void toNetwork(FriendlyByteBuf data, DnaRecipe recipe) {
-			data.writeResourceLocation(recipe.speciesType.id());
-			data.writeUtf(recipe.stage.getSerializedName());
-			data.writeShort(recipe.amount);
+		public StreamCodec<RegistryFriendlyByteBuf, DnaRecipe> streamCodec() {
+			return STREAM_CODEC;
 		}
 	}
 }

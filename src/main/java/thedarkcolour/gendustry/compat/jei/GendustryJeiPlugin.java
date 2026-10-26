@@ -4,13 +4,13 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeManager;
 
-import forestry.apiculture.compat.MutationRecipe;
-import forestry.core.ClientsideCode;
-import forestry.core.utils.RecipeUtils;
+import forestry.core.engine.genetics.mutations.MutationRecipe;
+import forestry.core.platform.client.ClientsideCode;
+import forestry.core.platform.util.RecipeUtils;
 
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
-import mezz.jei.api.forge.ForgeTypes;
+import mezz.jei.api.neoforge.NeoForgeTypes;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.registration.IGuiHandlerRegistration;
@@ -66,9 +66,9 @@ public class GendustryJeiPlugin implements IModPlugin {
 		registration.addRecipes(GendustryRecipeType.PROTEIN_LIQUEFIER, RecipeUtils.getRecipes(manager, GRecipeTypes.PROTEIN).toList());
 		registration.addRecipes(GendustryRecipeType.DNA_EXTRACTOR, RecipeUtils.getRecipes(manager, GRecipeTypes.DNA).toList());
 
-		registration.addIngredientInfo(GFluids.MUTAGEN.fluidStack(1000), ForgeTypes.FLUID_STACK, Component.translatable(TranslationKeys.JEI_INFO_MUTAGEN));
-		registration.addIngredientInfo(GFluids.LIQUID_DNA.fluidStack(1000), ForgeTypes.FLUID_STACK, Component.translatable(TranslationKeys.JEI_INFO_DNA));
-		registration.addIngredientInfo(GFluids.PROTEIN.fluidStack(1000), ForgeTypes.FLUID_STACK, Component.translatable(TranslationKeys.JEI_INFO_PROTEIN));
+		registration.addIngredientInfo(GFluids.MUTAGEN.fluidStack(1000), NeoForgeTypes.FLUID_STACK, Component.translatable(TranslationKeys.JEI_INFO_MUTAGEN));
+		registration.addIngredientInfo(GFluids.LIQUID_DNA.fluidStack(1000), NeoForgeTypes.FLUID_STACK, Component.translatable(TranslationKeys.JEI_INFO_DNA));
+		registration.addIngredientInfo(GFluids.PROTEIN.fluidStack(1000), NeoForgeTypes.FLUID_STACK, Component.translatable(TranslationKeys.JEI_INFO_PROTEIN));
 	}
 
 	@Override

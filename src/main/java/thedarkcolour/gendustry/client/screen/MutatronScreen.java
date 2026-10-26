@@ -3,7 +3,7 @@ package thedarkcolour.gendustry.client.screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 
-import forestry.core.config.Constants;
+import forestry.core.platform.config.Constants;
 
 import thedarkcolour.gendustry.Gendustry;
 import thedarkcolour.gendustry.menu.MutatronMenu;

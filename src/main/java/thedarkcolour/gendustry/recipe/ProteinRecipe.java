@@ -1,17 +1,19 @@
 package thedarkcolour.gendustry.recipe;
 
-import com.google.gson.JsonObject;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 
 import thedarkcolour.gendustry.registry.GRecipeTypes;
-import org.jetbrains.annotations.Nullable;
 
 public class ProteinRecipe extends ProcessorRecipe {
 	private final Ingredient ingredient;
@@ -42,25 +44,32 @@ public class ProteinRecipe extends ProcessorRecipe {
 	}
 
 	public static class Serializer implements RecipeSerializer<ProteinRecipe> {
-		@Override
-		public ProteinRecipe fromJson(ResourceLocation id, JsonObject json) {
-			Ingredient ingredient = Ingredient.fromJson(json.get("ingredient"));
-			int amount = GsonHelper.getAsInt(json, "amount");
+		private static final MapCodec<ProteinRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+			ResourceLocation.CODEC.fieldOf("id").forGetter(ProteinRecipe::getId),
+			Ingredient.CODEC_NONEMPTY.fieldOf("ingredient").forGetter(ProteinRecipe::getIngredient),
+			Codec.INT.fieldOf("amount").forGetter(ProteinRecipe::getAmount)
+		).apply(instance, ProteinRecipe::new));
+		private static final StreamCodec<RegistryFriendlyByteBuf, ProteinRecipe> STREAM_CODEC = StreamCodec.of(
+			(buffer, recipe) -> {
+				ResourceLocation.STREAM_CODEC.encode(buffer, recipe.getId());
+				Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, recipe.ingredient);
+				ByteBufCodecs.VAR_INT.encode(buffer, recipe.amount);
+			},
+			buffer -> new ProteinRecipe(
+				ResourceLocation.STREAM_CODEC.decode(buffer),
+				Ingredient.CONTENTS_STREAM_CODEC.decode(buffer),
+				ByteBufCodecs.VAR_INT.decode(buffer)
+			)
+		);
 
-			return new ProteinRecipe(id, ingredient, amount);
+		@Override
+		public MapCodec<ProteinRecipe> codec() {
+			return CODEC;
 		}
 
 		@Override
-		public @Nullable ProteinRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf data) {
-			Ingredient ingredient = Ingredient.fromNetwork(data);
-			int amount = data.readShort();
-			return new ProteinRecipe(id, ingredient, amount);
-		}
-
-		@Override
-		public void toNetwork(FriendlyByteBuf data, ProteinRecipe recipe) {
-			recipe.ingredient.toNetwork(data);
-			data.writeShort(recipe.amount);
+		public StreamCodec<RegistryFriendlyByteBuf, ProteinRecipe> streamCodec() {
+			return STREAM_CODEC;
 		}
 	}
 }

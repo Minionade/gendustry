@@ -4,8 +4,8 @@ import java.util.IdentityHashMap;
 
 import net.minecraft.world.item.crafting.RecipeManager;
 
-import forestry.api.genetics.ILifeStage;
-import forestry.core.utils.RecipeUtils;
+import forestry.api.core.genetics.ILifeStage;
+import forestry.core.platform.util.RecipeUtils;
 
 import thedarkcolour.gendustry.recipe.DnaRecipe;
 import thedarkcolour.gendustry.registry.GRecipeTypes;

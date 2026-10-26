@@ -15,7 +15,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class ProteinLiquefierBlockEntity extends ProducerBlockEntity<ProteinLiquefierBlockEntity, ProteinRecipe> {
 	private static final int ENERGY_PER_WORK_CYCLE = 20000;
-	private static final int TICKS_PER_WORK_CYCLE = 100;
+	private static final int STEPS_PER_WORK_CYCLE = 20;
 
 	public static final String HINTS_KEY = "gendustry.protein_liquefier";
 
@@ -36,7 +36,7 @@ public class ProteinLiquefierBlockEntity extends ProducerBlockEntity<ProteinLiqu
 
 	@Override
 	public void startWorking() {
-		setTicksPerWorkCycle(TICKS_PER_WORK_CYCLE);
+		setStepsPerWorkCycle(STEPS_PER_WORK_CYCLE);
 		setEnergyPerWorkCycle(ENERGY_PER_WORK_CYCLE);
 	}
 

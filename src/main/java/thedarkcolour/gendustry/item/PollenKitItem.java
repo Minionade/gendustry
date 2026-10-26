@@ -1,7 +1,7 @@
 package thedarkcolour.gendustry.item;
 
 import forestry.api.IForestryApi;
-import forestry.api.genetics.pollen.IPollen;
+import forestry.api.core.genetics.pollen.IPollen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;

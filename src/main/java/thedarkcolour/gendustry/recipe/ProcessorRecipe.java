@@ -1,10 +1,10 @@
 package thedarkcolour.gendustry.recipe;
 
-import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
-import forestry.api.recipes.IForestryRecipe;
+import forestry.api.core.machines.IForestryRecipe;
 
 public abstract class ProcessorRecipe implements IForestryRecipe {
 	private final ResourceLocation id;
@@ -20,7 +20,7 @@ public abstract class ProcessorRecipe implements IForestryRecipe {
 	}
 
 	@Override
-	public ItemStack getResultItem(RegistryAccess registryAccess) {
+	public ItemStack getResultItem(HolderLookup.Provider registryAccess) {
 		return ItemStack.EMPTY;
 	}
 

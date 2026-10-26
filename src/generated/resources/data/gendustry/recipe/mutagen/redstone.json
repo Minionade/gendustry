@@ -1,0 +1,8 @@
+{
+  "type": "gendustry:mutagen",
+  "amount": 100,
+  "ingredient": {
+    "item": "minecraft:redstone"
+  },
+  "id": "gendustry:mutagen/redstone"
+}

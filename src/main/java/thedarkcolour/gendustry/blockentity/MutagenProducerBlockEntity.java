@@ -17,7 +17,7 @@ import org.jetbrains.annotations.Nullable;
 public class MutagenProducerBlockEntity extends ProducerBlockEntity<MutagenProducerBlockEntity, MutagenRecipe> {
 	// All recipes take 100000 RF to process. Choose your mutagens wisely!
 	private static final int ENERGY_PER_WORK_CYCLE = 100000;
-	private static final int TICKS_PER_WORK_CYCLE = 200;
+	private static final int STEPS_PER_WORK_CYCLE = 40;
 
 	public static final String HINTS_KEY = "gendustry.mutagen_producer";
 
@@ -37,7 +37,7 @@ public class MutagenProducerBlockEntity extends ProducerBlockEntity<MutagenProdu
 
 	@Override
 	public void startWorking() {
-		setTicksPerWorkCycle(TICKS_PER_WORK_CYCLE);
+		setStepsPerWorkCycle(STEPS_PER_WORK_CYCLE);
 		setEnergyPerWorkCycle(ENERGY_PER_WORK_CYCLE);
 	}
 

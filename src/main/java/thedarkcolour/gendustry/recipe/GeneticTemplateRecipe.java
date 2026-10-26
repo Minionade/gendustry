@@ -2,18 +2,17 @@ package thedarkcolour.gendustry.recipe;
 
 import java.util.IdentityHashMap;
 
-import net.minecraft.core.RegistryAccess;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.inventory.CraftingContainer;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CraftingBookCategory;
+import net.minecraft.world.item.crafting.CraftingInput;
 import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 
-import forestry.api.genetics.ISpeciesType;
-import forestry.api.genetics.alleles.IAllele;
-import forestry.api.genetics.alleles.IChromosome;
+import forestry.api.core.genetics.ISpeciesType;
+import forestry.api.core.genetics.alleles.Allele;
+import forestry.api.core.genetics.alleles.IChromosome;
 
 import thedarkcolour.gendustry.item.GendustryResourceType;
 import thedarkcolour.gendustry.item.GeneSampleItem;
@@ -23,17 +22,17 @@ import thedarkcolour.gendustry.registry.GItems;
 import thedarkcolour.gendustry.registry.GRecipeTypes;
 
 public class GeneticTemplateRecipe extends CustomRecipe {
-	public GeneticTemplateRecipe(ResourceLocation id, CraftingBookCategory category) {
-		super(id, category);
+	public GeneticTemplateRecipe(CraftingBookCategory category) {
+		super(category);
 	}
 
 	@Override
-	public boolean matches(CraftingContainer container, Level level) {
+	public boolean matches(CraftingInput container, Level level) {
 		boolean hasTemplate = false;
 		ISpeciesType<?, ?> speciesType = null;
 		int samples = 0;
 
-		for (int i = 0; i < container.getContainerSize(); ++i) {
+		for (int i = 0; i < container.size(); ++i) {
 			ItemStack stack = container.getItem(i);
 
 			// Skip empty slot
@@ -89,12 +88,12 @@ public class GeneticTemplateRecipe extends CustomRecipe {
 	}
 
 	@Override
-	public ItemStack assemble(CraftingContainer container, RegistryAccess registryAccess) {
-		IdentityHashMap<IChromosome<?>, IAllele> samples = new IdentityHashMap<>();
+	public ItemStack assemble(CraftingInput container, HolderLookup.Provider registryAccess) {
+		IdentityHashMap<IChromosome<?>, Allele<?>> samples = new IdentityHashMap<>();
 		ItemStack template = ItemStack.EMPTY;
 		ISpeciesType<?, ?> type = null;
 
-		for (int i = 0; i < container.getContainerSize(); ++i) {
+		for (int i = 0; i < container.size(); ++i) {
 			ItemStack stack = container.getItem(i);
 
 			if (stack.isEmpty()) {
@@ -102,7 +101,8 @@ public class GeneticTemplateRecipe extends CustomRecipe {
 			}
 			if (stack.is(GItems.GENE_SAMPLE.item())) {
 				IChromosome<?> chromosome = GeneSampleItem.getChromosome(stack);
-				IAllele allele = GeneSampleItem.getAllele(stack);
+				Allele<?> allele = GeneSampleItem.getAllele(stack);
+				if (chromosome == null || allele == null) return ItemStack.EMPTY;
 
 				samples.put(chromosome, allele);
 
@@ -136,6 +136,6 @@ public class GeneticTemplateRecipe extends CustomRecipe {
 
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return GRecipeTypes.GENETIC_TEMPLATE_SERIALIZER.get();
+		return GRecipeTypes.GENETIC_TEMPLATE_SERIALIZER.value();
 	}
 }

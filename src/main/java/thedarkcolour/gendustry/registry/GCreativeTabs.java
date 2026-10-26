@@ -3,15 +3,15 @@ package thedarkcolour.gendustry.registry;
 import net.minecraft.world.item.CreativeModeTab;
 
 import forestry.api.IForestryApi;
-import forestry.api.genetics.ISpeciesType;
-import forestry.api.genetics.alleles.IAllele;
-import forestry.api.genetics.alleles.IChromosome;
-import forestry.api.genetics.alleles.IKaryotype;
-import forestry.core.tab.ForestryCreativeTabs;
-import forestry.modules.features.FeatureCreativeTab;
-import forestry.modules.features.FeatureProvider;
-import forestry.modules.features.IFeatureRegistry;
-import forestry.modules.features.ModFeatureRegistry;
+import forestry.api.core.genetics.ISpeciesType;
+import forestry.api.core.genetics.alleles.Allele;
+import forestry.api.core.genetics.alleles.IChromosome;
+import forestry.api.core.genetics.alleles.IKaryotype;
+import forestry.core.platform.tab.ForestryCreativeTabs;
+import forestry.core.platform.registration.FeatureCreativeTab;
+import forestry.core.platform.registration.FeatureProvider;
+import forestry.core.platform.registration.IFeatureRegistry;
+import forestry.core.platform.registration.ModFeatureRegistry;
 
 import thedarkcolour.gendustry.GendustryModule;
 import thedarkcolour.gendustry.block.GendustryMachineType;
@@ -50,9 +50,7 @@ public class GCreativeTabs {
 			IKaryotype karyotype = speciesType.getKaryotype();
 
 			for (IChromosome<?> chromosome : karyotype.getChromosomes()) {
-				for (IAllele allele : karyotype.getAlleles(chromosome)) {
-					items.accept(GeneSampleItem.createStack(speciesType, chromosome, allele));
-				}
+				items.accept(GeneSampleItem.createStack(speciesType, chromosome, karyotype.getDefaultAllele(chromosome)));
 			}
 		}
 	}

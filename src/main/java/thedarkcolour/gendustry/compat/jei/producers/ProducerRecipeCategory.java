@@ -5,12 +5,12 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluid;
 
-import net.minecraftforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.FluidStack;
 
-import forestry.core.recipes.jei.ForestryRecipeCategory;
+import forestry.core.platform.recipes.jei.ForestryRecipeCategory;
 
 import mezz.jei.api.constants.VanillaTypes;
-import mezz.jei.api.forge.ForgeTypes;
+import mezz.jei.api.neoforge.NeoForgeTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.drawable.IDrawableAnimated;
@@ -24,7 +24,7 @@ import thedarkcolour.gendustry.recipe.ProcessorRecipe;
 import thedarkcolour.gendustry.registry.GBlocks;
 
 public abstract class ProducerRecipeCategory<T extends ProcessorRecipe> extends ForestryRecipeCategory<T> {
-	protected static final ResourceLocation GUI = new ResourceLocation(Gendustry.ID, "textures/gui/processor.png");
+	protected static final ResourceLocation GUI = Gendustry.loc("textures/gui/processor.png");
 
 	private final IDrawableAnimated arrow;
 	private final IDrawable tankOverlay;
@@ -53,6 +53,6 @@ public abstract class ProducerRecipeCategory<T extends ProcessorRecipe> extends 
 		builder.addSlot(RecipeIngredientRole.OUTPUT, 109, 1)
 				.setFluidRenderer(10000, false, 16, 58)
 				.setOverlay(tankOverlay, 0, 0)
-				.addIngredient(ForgeTypes.FLUID_STACK, new FluidStack(fluid, amount));
+				.addIngredient(NeoForgeTypes.FLUID_STACK, new FluidStack(fluid, amount));
 	}
 }

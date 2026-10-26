@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import net.minecraft.data.loot.BlockLootSubProvider;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.LootTable;
@@ -16,8 +17,8 @@ import thedarkcolour.gendustry.registry.GBlocks;
 class BlockLoot extends BlockLootSubProvider {
 	private final List<Block> added = new ArrayList<>();
 
-	BlockLoot() {
-		super(Set.of(), FeatureFlags.DEFAULT_FLAGS);
+	BlockLoot(HolderLookup.Provider registries) {
+		super(Set.of(), FeatureFlags.DEFAULT_FLAGS, registries);
 	}
 
 	@Override

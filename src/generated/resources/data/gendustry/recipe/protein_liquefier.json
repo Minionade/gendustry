@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": {
+      "tag": "c:gears/bronze"
+    },
+    "H": {
+      "item": "minecraft:hopper"
+    },
+    "M": {
+      "item": "gendustry:power_module"
+    },
+    "P": {
+      "item": "minecraft:piston"
+    },
+    "S": {
+      "item": "forestry:sturdy_machine"
+    }
+  },
+  "pattern": [
+    "GHG",
+    "PSP",
+    "GMG"
+  ],
+  "result": {
+    "item": "gendustry:protein_liquefier"
+  },
+  "show_notification": true
+}

@@ -5,12 +5,12 @@ import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.MenuType;
 
-import forestry.core.gui.ContainerTile;
-import forestry.core.gui.slots.SlotFiltered;
-import forestry.core.gui.slots.SlotOutput;
-import forestry.core.tiles.IFilterSlotDelegate;
-import forestry.core.tiles.TilePowered;
-import forestry.core.tiles.TileUtil;
+import forestry.core.platform.gui.ContainerTile;
+import forestry.core.platform.gui.slots.SlotFiltered;
+import forestry.core.platform.gui.slots.SlotOutput;
+import forestry.api.core.IFilterSlotDelegate;
+import forestry.core.platform.tile.TilePowered;
+import forestry.core.platform.tile.TileUtil;
 
 import thedarkcolour.gendustry.blockentity.GeneticTransposerBlockEntity;
 import thedarkcolour.gendustry.blockentity.IHintTile;

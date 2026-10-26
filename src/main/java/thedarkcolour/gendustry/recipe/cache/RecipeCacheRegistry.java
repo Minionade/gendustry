@@ -7,15 +7,15 @@ import java.util.function.Consumer;
 import net.minecraft.util.Unit;
 import net.minecraft.world.item.crafting.RecipeManager;
 
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.AddReloadListenerEvent;
-import net.minecraftforge.event.TagsUpdatedEvent;
-import net.minecraftforge.event.server.ServerStoppingEvent;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.AddReloadListenerEvent;
+import net.neoforged.neoforge.event.TagsUpdatedEvent;
+import net.neoforged.neoforge.event.server.ServerStoppingEvent;
 
-import net.minecraftforge.fml.loading.FMLEnvironment;
+import net.neoforged.fml.loading.FMLEnvironment;
 
-import forestry.core.ClientsideCode;
+import forestry.core.platform.client.ClientsideCode;
 
 /**
  * Register your {@link IRecipeCache} recipe caches here so that they are properly reloaded.
@@ -32,8 +32,8 @@ public final class RecipeCacheRegistry {
 		registerCaches.accept(builder::add);
 		this.caches = builder.build();
 
-		MinecraftForge.EVENT_BUS.addListener((ServerStoppingEvent event) -> unload());
-		MinecraftForge.EVENT_BUS.addListener((AddReloadListenerEvent event) -> {
+		NeoForge.EVENT_BUS.addListener((ServerStoppingEvent event) -> unload());
+		NeoForge.EVENT_BUS.addListener((AddReloadListenerEvent event) -> {
 			RecipeManager recipes = event.getServerResources().getRecipeManager();
 			event.addListener((prepBarrier, resourceManager, prepProfiler, reloadProfiler, backgroundExecutor, gameExecutor) ->
 					prepBarrier
@@ -43,7 +43,7 @@ public final class RecipeCacheRegistry {
 		});
 
 		if (FMLEnvironment.dist == Dist.CLIENT) {
-			MinecraftForge.EVENT_BUS.addListener((TagsUpdatedEvent event) -> {
+			NeoForge.EVENT_BUS.addListener((TagsUpdatedEvent event) -> {
 				RecipeManager recipes = ClientsideCode.getRecipeManager();
 
 				if (this.needsReload && recipes != null) {

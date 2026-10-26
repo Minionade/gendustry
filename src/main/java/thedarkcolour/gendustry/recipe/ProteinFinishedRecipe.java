@@ -24,6 +24,7 @@ public class ProteinFinishedRecipe implements FinishedRecipe {
 
 	@Override
 	public void serializeRecipeData(JsonObject json) {
+		json.addProperty("id", this.id.toString());
 		json.add("ingredient", this.ingredient.toJson());
 		json.addProperty("amount", this.amount);
 	}

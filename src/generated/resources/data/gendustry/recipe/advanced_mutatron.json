@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": {
+      "tag": "c:gears/bronze"
+    },
+    "H": {
+      "tag": "c:gems/quartz"
+    },
+    "M": {
+      "item": "gendustry:power_module"
+    },
+    "P": {
+      "item": "gendustry:genetics_processor"
+    },
+    "S": {
+      "item": "gendustry:mutatron"
+    }
+  },
+  "pattern": [
+    "GHG",
+    "PSP",
+    "GMG"
+  ],
+  "result": {
+    "item": "gendustry:advanced_mutatron"
+  },
+  "show_notification": true
+}

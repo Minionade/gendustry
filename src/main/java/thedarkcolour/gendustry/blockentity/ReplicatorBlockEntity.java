@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.Set;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -11,20 +12,19 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 
-import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 
 import forestry.api.apiculture.genetics.IBee;
 import forestry.api.core.IErrorLogic;
-import forestry.api.genetics.IGenome;
-import forestry.api.genetics.IIndividual;
-import forestry.api.genetics.ISpecies;
-import forestry.api.genetics.ISpeciesType;
-import forestry.api.genetics.alleles.IAllele;
-import forestry.api.genetics.alleles.IChromosome;
-import forestry.api.genetics.alleles.IValueAllele;
-import forestry.api.genetics.capability.IIndividualHandlerItem;
-import forestry.core.fluids.FilteredTank;
-import forestry.core.fluids.FluidHelper;
+import forestry.api.core.genetics.IGenome;
+import forestry.api.core.genetics.IIndividual;
+import forestry.api.core.genetics.ISpecies;
+import forestry.api.core.genetics.ISpeciesType;
+import forestry.api.core.genetics.alleles.Allele;
+import forestry.api.core.genetics.alleles.IChromosome;
+import forestry.api.core.genetics.capability.IIndividualHandlerItem;
+import forestry.core.platform.fluids.FilteredTank;
+import forestry.core.platform.fluids.FluidHelper;
 
 import org.jetbrains.annotations.Nullable;
 import thedarkcolour.gendustry.compat.forestry.GendustryError;
@@ -51,7 +51,7 @@ public class ReplicatorBlockEntity extends PoweredTankBlockEntity {
 		setInternalInventory(this.inventory);
 
 		setEnergyPerWorkCycle(200000);
-		setTicksPerWorkCycle(50);
+		setStepsPerWorkCycle(10);
 	}
 
 	@Override
@@ -83,7 +83,7 @@ public class ReplicatorBlockEntity extends PoweredTankBlockEntity {
 		// Read template
 		ItemStack template = this.inventory.getItem(ReplicatorInventory.SLOT_TEMPLATE);
 		ISpeciesType<?, ?> speciesType = GeneticTemplateItem.getSpeciesType(template);
-		Map<IChromosome<?>, IAllele> alleles = GeneticTemplateItem.getAlleles(template);
+		Map<IChromosome<?>, Allele<?>> alleles = GeneticTemplateItem.getAlleles(template);
 		if (speciesType == null) {
 			return false;
 		}
@@ -93,8 +93,11 @@ public class ReplicatorBlockEntity extends PoweredTankBlockEntity {
 		this.proteinTank.drain(1000, IFluidHandler.FluidAction.EXECUTE);
 
 		// Create new individual
-		IValueAllele<ISpecies<?>> speciesAllele = alleles.get(speciesType.getKaryotype().getSpeciesChromosome()).cast();
-		IIndividual individual = speciesAllele.value().createIndividual(alleles);
+		Allele<?> speciesAllele = alleles.get(speciesType.getKaryotype().getSpeciesChromosome());
+		if (speciesAllele == null || !(speciesAllele.value() instanceof ResourceLocation speciesId)) return false;
+		ISpecies<?> species = speciesType.getSpeciesSafe(speciesId);
+		if (species == null) return false;
+		IIndividual individual = species.createIndividual(alleles);
 		// Ignoble stock
 		if (individual instanceof IBee bee) {
 			bee.setPristine(false);

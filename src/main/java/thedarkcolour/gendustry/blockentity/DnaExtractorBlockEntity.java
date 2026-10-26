@@ -6,7 +6,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import forestry.api.core.ForestryError;
 import forestry.api.core.IError;
-import forestry.api.genetics.capability.IIndividualHandlerItem;
+import forestry.api.core.genetics.capability.IIndividualHandlerItem;
 
 import thedarkcolour.gendustry.recipe.DnaRecipe;
 import thedarkcolour.gendustry.recipe.cache.DnaRecipeCache;
@@ -16,7 +16,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class DnaExtractorBlockEntity extends ProducerBlockEntity<DnaExtractorBlockEntity, DnaRecipe> {
 	private static final int ENERGY_PER_WORK_CYCLE = 80000;
-	private static final int TICKS_PER_WORK_CYCLE = 50;
+	private static final int STEPS_PER_WORK_CYCLE = 10;
 
 	public static final String HINTS_KEY = "gendustry.dna_extractor";
 
@@ -38,7 +38,7 @@ public class DnaExtractorBlockEntity extends ProducerBlockEntity<DnaExtractorBlo
 
 	@Override
 	public void startWorking() {
-		setTicksPerWorkCycle(TICKS_PER_WORK_CYCLE);
+		setStepsPerWorkCycle(STEPS_PER_WORK_CYCLE);
 		setEnergyPerWorkCycle(ENERGY_PER_WORK_CYCLE);
 	}
 

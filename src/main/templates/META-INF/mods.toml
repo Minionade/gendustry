@@ -15,9 +15,9 @@ license="GNU GPLv3"
 	'''
 
 [[dependencies.gendustry]]
-	modId="forge"
+	modId="neoforge"
 	mandatory=true
-	versionRange="${forgeVersionRange}"
+	versionRange="${neoForgeVersionRange}"
 	ordering="NONE"
 	side="BOTH"
 
@@ -33,7 +33,7 @@ license="GNU GPLv3"
 	mandatory=true
 	versionRange="${forestryVersionRange}"
 	ordering="NONE"
-	side="CLIENT"
+	side="BOTH"
 
 [[dependencies.gendustry]]
 	modId="jei"

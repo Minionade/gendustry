@@ -3,11 +3,11 @@ package thedarkcolour.gendustry.menu;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 
-import forestry.core.gui.ContainerLiquidTanks;
-import forestry.core.gui.slots.SlotFiltered;
-import forestry.core.gui.slots.SlotLiquidIn;
-import forestry.core.gui.slots.SlotOutput;
-import forestry.core.tiles.TileUtil;
+import forestry.core.platform.gui.ContainerLiquidTanks;
+import forestry.core.platform.gui.slots.SlotFiltered;
+import forestry.core.platform.gui.slots.SlotLiquidIn;
+import forestry.core.platform.gui.slots.SlotOutput;
+import forestry.core.platform.tile.TileUtil;
 
 import thedarkcolour.gendustry.blockentity.ProducerBlockEntity;
 import thedarkcolour.gendustry.blockentity.ProducerInventory;

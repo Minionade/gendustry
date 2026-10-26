@@ -1,0 +1,8 @@
+{
+  "type": "gendustry:mutagen",
+  "amount": 900,
+  "ingredient": {
+    "item": "minecraft:redstone_block"
+  },
+  "id": "gendustry:mutagen/redstone_block"
+}

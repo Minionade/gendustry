@@ -2,13 +2,13 @@ package thedarkcolour.gendustry.registry;
 
 import net.minecraft.world.item.Item;
 
-import forestry.core.items.ItemForestry;
-import forestry.modules.features.FeatureGroup;
-import forestry.modules.features.FeatureItem;
-import forestry.modules.features.FeatureItemGroup;
-import forestry.modules.features.FeatureProvider;
-import forestry.modules.features.IFeatureRegistry;
-import forestry.modules.features.ModFeatureRegistry;
+import forestry.core.platform.item.ItemForestry;
+import forestry.core.platform.registration.FeatureGroup;
+import forestry.core.platform.registration.FeatureItem;
+import forestry.core.platform.registration.FeatureItemGroup;
+import forestry.core.platform.registration.FeatureProvider;
+import forestry.core.platform.registration.IFeatureRegistry;
+import forestry.core.platform.registration.ModFeatureRegistry;
 
 import thedarkcolour.gendustry.GendustryModule;
 import thedarkcolour.gendustry.item.EliteGendustryUpgradeType;

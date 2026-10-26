@@ -1,14 +1,14 @@
 package thedarkcolour.gendustry.registry;
 
-import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeSerializer;
 
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
-import forestry.modules.features.FeatureProvider;
-import forestry.modules.features.FeatureRecipeType;
-import forestry.modules.features.IFeatureRegistry;
-import forestry.modules.features.ModFeatureRegistry;
+import forestry.core.platform.registration.FeatureProvider;
+import forestry.core.platform.registration.FeatureRecipeType;
+import forestry.core.platform.registration.IFeatureRegistry;
+import forestry.core.platform.registration.ModFeatureRegistry;
 
 import thedarkcolour.gendustry.GendustryModule;
 import thedarkcolour.gendustry.recipe.DnaRecipe;
@@ -24,5 +24,5 @@ public class GRecipeTypes {
 	public static final FeatureRecipeType<ProteinRecipe> PROTEIN = REGISTRY.recipeType("protein", ProteinRecipe.Serializer::new);
 	public static final FeatureRecipeType<DnaRecipe> DNA = REGISTRY.recipeType("dna", DnaRecipe.Serializer::new);
 
-	public static final RegistryObject<SimpleCraftingRecipeSerializer<?>> GENETIC_TEMPLATE_SERIALIZER = REGISTRY.getRegistry(Registries.RECIPE_SERIALIZER).register("genetic_template", () -> new SimpleCraftingRecipeSerializer<>(GeneticTemplateRecipe::new));
+	public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<?>> GENETIC_TEMPLATE_SERIALIZER = REGISTRY.getRegistry(net.minecraft.core.registries.Registries.RECIPE_SERIALIZER).register("genetic_template", () -> new SimpleCraftingRecipeSerializer<>(GeneticTemplateRecipe::new));
 }

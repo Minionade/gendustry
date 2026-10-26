@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": {
+      "tag": "c:gears/bronze"
+    },
+    "I": {
+      "tag": "c:storage_blocks/gold"
+    },
+    "R": {
+      "item": "gendustry:power_module"
+    },
+    "T": {
+      "item": "minecraft:ghast_tear"
+    }
+  },
+  "pattern": [
+    "ITI",
+    "RGR",
+    "ITI"
+  ],
+  "result": {
+    "count": 2,
+    "item": "gendustry:elite_upgrade_frame"
+  },
+  "show_notification": true
+}

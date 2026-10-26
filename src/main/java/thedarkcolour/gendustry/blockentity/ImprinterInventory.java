@@ -3,8 +3,8 @@ package thedarkcolour.gendustry.blockentity;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
 
-import forestry.api.genetics.capability.IIndividualHandlerItem;
-import forestry.core.inventory.InventoryAdapterTile;
+import forestry.api.core.genetics.capability.IIndividualHandlerItem;
+import forestry.core.platform.inventory.InventoryAdapterTile;
 
 import thedarkcolour.gendustry.item.GendustryResourceType;
 import thedarkcolour.gendustry.item.GeneticTemplateItem;

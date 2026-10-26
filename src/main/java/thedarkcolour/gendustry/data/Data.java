@@ -4,17 +4,17 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 
-import net.minecraftforge.data.event.GatherDataEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.neoforged.neoforge.data.event.GatherDataEvent;
+import net.neoforged.bus.api.SubscribeEvent;
 
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.fml.common.Mod;
 
 import thedarkcolour.gendustry.Gendustry;
 import thedarkcolour.modkit.data.DataHelper;
 
 public class Data {
 	public static void gatherData(GatherDataEvent event) {
-		DataHelper helper = new DataHelper(Gendustry.ID, event);
+		DataHelper helper = new DataHelper.Builder(Gendustry.ID, event).packOutput(event.getGenerator().getPackOutput()).build();
 		DataGenerator generator = event.getGenerator();
 		PackOutput output = generator.getPackOutput();
 
@@ -25,6 +25,6 @@ public class Data {
 		helper.createTags(Registries.BLOCK, ModTags::addBlockTags);
 		helper.createTags(Registries.ITEM, ModTags::addItemTags);
 
-		generator.addProvider(event.includeServer(), new LootProvider(output));
+		generator.addProvider(event.includeServer(), new LootProvider(output, event.getLookupProvider()));
 	}
 }

@@ -6,8 +6,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 
-import forestry.api.genetics.IMutation;
-import forestry.api.genetics.ISpecies;
+import forestry.api.core.genetics.IMutation;
+import forestry.api.core.genetics.ISpecies;
 
 import thedarkcolour.gendustry.registry.GBlockEntities;
 

@@ -6,9 +6,9 @@ import net.minecraft.world.item.ItemStack;
 
 import forestry.api.apiculture.IBeeHousingInventory;
 import forestry.api.apiculture.genetics.BeeLifeStage;
-import forestry.api.genetics.capability.IIndividualHandlerItem;
-import forestry.core.inventory.InventoryAdapterTile;
-import forestry.core.utils.InventoryUtil;
+import forestry.api.core.genetics.capability.IIndividualHandlerItem;
+import forestry.core.platform.inventory.InventoryAdapterTile;
+import forestry.core.platform.util.InventoryUtil;
 
 import thedarkcolour.gendustry.api.GendustryTags;
 

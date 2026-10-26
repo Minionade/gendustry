@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": {
+      "item": "gendustry:genetics_processor"
+    },
+    "G": {
+      "tag": "c:gears/bronze"
+    },
+    "H": {
+      "item": "minecraft:hopper"
+    },
+    "P": {
+      "item": "gendustry:power_module"
+    },
+    "S": {
+      "item": "forestry:sturdy_machine"
+    }
+  },
+  "pattern": [
+    "GHG",
+    "DSD",
+    "GPG"
+  ],
+  "result": {
+    "item": "gendustry:dna_extractor"
+  },
+  "show_notification": true
+}

@@ -3,10 +3,10 @@ package thedarkcolour.gendustry.registry;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 
-import forestry.modules.features.FeatureBlockGroup;
-import forestry.modules.features.FeatureProvider;
-import forestry.modules.features.IFeatureRegistry;
-import forestry.modules.features.ModFeatureRegistry;
+import forestry.core.platform.registration.FeatureBlockGroup;
+import forestry.core.platform.registration.FeatureProvider;
+import forestry.core.platform.registration.IFeatureRegistry;
+import forestry.core.platform.registration.ModFeatureRegistry;
 
 import thedarkcolour.gendustry.GendustryModule;
 import thedarkcolour.gendustry.block.GendustryMachineBlock;

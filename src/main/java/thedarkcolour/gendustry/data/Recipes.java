@@ -11,20 +11,18 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
 
-import net.minecraftforge.common.Tags;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+import net.minecraft.core.registries.BuiltInRegistries;
 
 import forestry.api.ForestryConstants;
 import forestry.api.ForestryTags;
 import forestry.api.IForestryApi;
 import forestry.api.apiculture.genetics.BeeLifeStage;
 import forestry.api.arboriculture.genetics.TreeLifeStage;
-import forestry.api.genetics.ForestrySpeciesTypes;
-import forestry.api.genetics.ILifeStage;
+import forestry.api.core.genetics.ForestrySpeciesTypes;
+import forestry.api.core.genetics.ILifeStage;
 import forestry.api.lepidopterology.genetics.ButterflyLifeStage;
-import forestry.core.items.ItemForestry;
-import forestry.modules.features.FeatureItem;
+import forestry.core.platform.item.ItemForestry;
+import forestry.core.platform.registration.FeatureItem;
 
 import thedarkcolour.gendustry.Gendustry;
 import thedarkcolour.gendustry.block.GendustryMachineType;
@@ -41,11 +39,11 @@ import thedarkcolour.gendustry.registry.GRecipeTypes;
 import thedarkcolour.modkit.data.MKRecipeProvider;
 
 class Recipes {
-	private static final RegistryObject<Item> SILK_WISP = RegistryObject.create(ForestryConstants.forestry("silk_wisp"), ForgeRegistries.ITEMS);
-	private static final RegistryObject<Item> BEESWAX = RegistryObject.create(ForestryConstants.forestry("beeswax"), ForgeRegistries.ITEMS);
-	private static final RegistryObject<Item> ROYAL_JELLY = RegistryObject.create(ForestryConstants.forestry("royal_jelly"), ForgeRegistries.ITEMS);
-	private static final RegistryObject<Item> POLLEN_CLUSTER = RegistryObject.create(ForestryConstants.forestry("pollen_cluster_normal"), ForgeRegistries.ITEMS);
-	private static final RegistryObject<Item> STURDY_CASING = RegistryObject.create(ForestryConstants.forestry("sturdy_machine"), ForgeRegistries.ITEMS);
+	private static final Item SILK_WISP = BuiltInRegistries.ITEM.get(ForestryConstants.forestry("silk_wisp"));
+	private static final Item BEESWAX = BuiltInRegistries.ITEM.get(ForestryConstants.forestry("beeswax"));
+	private static final Item ROYAL_JELLY = BuiltInRegistries.ITEM.get(ForestryConstants.forestry("royal_jelly"));
+	private static final Item POLLEN_CLUSTER = BuiltInRegistries.ITEM.get(ForestryConstants.forestry("pollen_cluster_normal"));
+	private static final Item STURDY_CASING = BuiltInRegistries.ITEM.get(ForestryConstants.forestry("sturdy_machine"));
 
 	static void addRecipes(Consumer<FinishedRecipe> writer, MKRecipeProvider recipes) {
 		// Genetic Template
@@ -86,27 +84,27 @@ class Recipes {
 		machineCraftingRecipes(recipes);
 
 		// Pollen Kit
-		recipes.shapelessCrafting(RecipeCategory.TOOLS, GItems.POLLEN_KIT, 1, GItems.RESOURCE.item(GendustryResourceType.LABWARE), Tags.Items.STRING, Items.PAPER);
+		recipes.shapelessCrafting(RecipeCategory.TOOLS, GItems.POLLEN_KIT, 1, GItems.RESOURCE.item(GendustryResourceType.LABWARE), CommonTags.STRING, Items.PAPER);
 	}
 
 	private static void resourceCraftingRecipes(MKRecipeProvider recipes) {
 		recipes.shapedCrafting(RecipeCategory.MISC, GItems.RESOURCE.item(GendustryResourceType.LABWARE), 2, recipe -> {
-			recipe.define('G', Tags.Items.GLASS_PANES);
-			recipe.define('D', Tags.Items.GEMS_DIAMOND);
+			recipe.define('G', CommonTags.GLASS_PANES);
+			recipe.define('D', CommonTags.GEMS_DIAMOND);
 			recipe.pattern("G G");
 			recipe.pattern("G G");
 			recipe.pattern(" D ");
 		});
 		recipes.shapedCrafting(RecipeCategory.MISC, GItems.RESOURCE.item(GendustryResourceType.UPGRADE_FRAME), 2, recipe -> {
 			recipe.define('I', ForestryTags.Items.INGOTS_TIN);
-			recipe.define('R', Tags.Items.DUSTS_REDSTONE);
-			recipe.define('G', Tags.Items.NUGGETS_GOLD);
+			recipe.define('R', CommonTags.DUSTS_REDSTONE);
+			recipe.define('G', CommonTags.NUGGETS_GOLD);
 			recipe.pattern("IGI");
 			recipe.pattern("R R");
 			recipe.pattern("IGI");
 		});
 		recipes.shapedCrafting(RecipeCategory.MISC, GItems.RESOURCE.item(GendustryResourceType.ELITE_UPGRADE_FRAME), 2, recipe -> {
-			recipe.define('I', Tags.Items.STORAGE_BLOCKS_GOLD);
+			recipe.define('I', CommonTags.STORAGE_BLOCKS_GOLD);
 			recipe.define('R', GItems.RESOURCE.item(GendustryResourceType.POWER_MODULE));
 			recipe.define('G', ForestryTags.Items.GEARS_BRONZE);
 			recipe.define('T', Items.GHAST_TEAR);
@@ -115,7 +113,7 @@ class Recipes {
 			recipe.pattern("ITI");
 		});
 		recipes.shapedCrafting(RecipeCategory.MISC, GItems.RESOURCE.item(GendustryResourceType.CLIMATE_CONTROL_MODULE), recipe -> {
-			recipe.define('R', Tags.Items.DUSTS_REDSTONE);
+			recipe.define('R', CommonTags.DUSTS_REDSTONE);
 			recipe.define('B', ForestryTags.Items.INGOTS_BRONZE);
 			recipe.define('G', ForestryTags.Items.GEARS_BRONZE);
 			recipe.pattern("BRB");
@@ -123,50 +121,50 @@ class Recipes {
 			recipe.pattern("BRB");
 		});
 		recipes.shapedCrafting(RecipeCategory.MISC, GItems.RESOURCE.item(GendustryResourceType.POWER_MODULE), recipe -> {
-			recipe.define('R', Tags.Items.STORAGE_BLOCKS_REDSTONE);
+			recipe.define('R', CommonTags.STORAGE_BLOCKS_REDSTONE);
 			recipe.define('G', ForestryTags.Items.GEARS_BRONZE);
-			recipe.define('I', Tags.Items.INGOTS_GOLD);
+			recipe.define('I', CommonTags.INGOTS_GOLD);
 			recipe.define('P', Items.PISTON);
 			recipe.pattern("GIG");
 			recipe.pattern("PRP");
 			recipe.pattern("GIG");
 		});
 		recipes.shapedCrafting(RecipeCategory.MISC, GItems.RESOURCE.item(GendustryResourceType.GENETICS_PROCESSOR), recipe -> {
-			recipe.define('D', Tags.Items.GEMS_DIAMOND);
-			recipe.define('Q', Tags.Items.GEMS_QUARTZ);
-			recipe.define('P', Tags.Items.ENDER_PEARLS);
+			recipe.define('D', CommonTags.GEMS_DIAMOND);
+			recipe.define('Q', CommonTags.GEMS_QUARTZ);
+			recipe.define('P', CommonTags.ENDER_PEARLS);
 			recipe.pattern("DQD");
 			recipe.pattern("QPQ");
 			recipe.pattern("DQD");
 		});
 		recipes.shapedCrafting(RecipeCategory.MISC, GItems.RESOURCE.item(GendustryResourceType.ENVIRONMENTAL_PROCESSOR), recipe -> {
-			recipe.define('D', Tags.Items.GEMS_DIAMOND);
-			recipe.define('Q', Tags.Items.GEMS_LAPIS);
-			recipe.define('P', Tags.Items.INGOTS_GOLD);
+			recipe.define('D', CommonTags.GEMS_DIAMOND);
+			recipe.define('Q', CommonTags.GEMS_LAPIS);
+			recipe.define('P', CommonTags.INGOTS_GOLD);
 			recipe.pattern("DQD");
 			recipe.pattern("QPQ");
 			recipe.pattern("DQD");
 		});
 		recipes.shapedCrafting(RecipeCategory.MISC, GItems.RESOURCE.item(GendustryResourceType.BLANK_GENE_SAMPLE), recipe -> {
 			recipe.define('I', ForestryTags.Items.INGOTS_TIN);
-			recipe.define('R', Tags.Items.DUSTS_REDSTONE);
+			recipe.define('R', CommonTags.DUSTS_REDSTONE);
 			recipe.pattern(" I ");
 			recipe.pattern("IRI");
 			recipe.pattern(" I ");
 		});
 		recipes.shapedCrafting(RecipeCategory.MISC, GItems.RESOURCE.item(GendustryResourceType.BLANK_GENETIC_TEMPLATE), recipe -> {
 			recipe.define('I', GItems.RESOURCE.item(GendustryResourceType.BLANK_GENE_SAMPLE));
-			recipe.define('R', Tags.Items.DUSTS_REDSTONE);
-			recipe.define('D', Tags.Items.GEMS_DIAMOND);
+			recipe.define('R', CommonTags.DUSTS_REDSTONE);
+			recipe.define('D', CommonTags.GEMS_DIAMOND);
 			recipe.pattern("RIR");
 			recipe.pattern("IDI");
 			recipe.pattern("RIR");
 		});
 		recipes.shapedCrafting(RecipeCategory.MISC, GItems.RESOURCE.item(GendustryResourceType.RECEPTACLE), recipe -> {
 			recipe.define('I', ForestryTags.Items.INGOTS_BRONZE);
-			recipe.define('P', Tags.Items.GLASS_PANES);
+			recipe.define('P', CommonTags.GLASS_PANES);
 			recipe.define('G', Blocks.LIGHT_WEIGHTED_PRESSURE_PLATE);
-			recipe.define('R', Tags.Items.DUSTS_REDSTONE);
+			recipe.define('R', CommonTags.DUSTS_REDSTONE);
 			recipe.pattern("III");
 			recipe.pattern("IPI");
 			recipe.pattern("RGR");
@@ -185,7 +183,7 @@ class Recipes {
 		recipes.shapedCrafting(RecipeCategory.MISC, GItems.UPGRADE.item(GendustryUpgradeType.AUTOMATION), recipe -> {
 			recipe.define('F', upgradeFrame);
 			recipe.define('G', ForestryTags.Items.GEARS_BRONZE);
-			recipe.define('R', Tags.Items.DUSTS_REDSTONE);
+			recipe.define('R', CommonTags.DUSTS_REDSTONE);
 			recipe.define('C', Items.COMPARATOR);
 			recipe.pattern(" G ");
 			recipe.pattern("RFR");
@@ -212,7 +210,7 @@ class Recipes {
 		recipes.shapedCrafting(RecipeCategory.MISC, GItems.UPGRADE.item(GendustryUpgradeType.HUMIDIFIER), recipe -> {
 			recipe.define('F', upgradeFrame);
 			recipe.define('C', GItems.RESOURCE.item(GendustryResourceType.CLIMATE_CONTROL_MODULE));
-			recipe.define('P', Tags.Items.MUSHROOMS);
+			recipe.define('P', CommonTags.MUSHROOMS);
 			recipe.define('I', ForestryTags.Items.INGOTS_BRONZE);
 			recipe.pattern("PPP");
 			recipe.pattern("IFI");
@@ -239,7 +237,7 @@ class Recipes {
 		recipes.shapedCrafting(RecipeCategory.MISC, GItems.UPGRADE.item(GendustryUpgradeType.SCRUBBER), recipe -> {
 			recipe.define('F', upgradeFrame);
 			recipe.define('G', ForestryTags.Items.GEARS_BRONZE);
-			recipe.define('S', SILK_WISP.get());
+			recipe.define('S', SILK_WISP);
 			recipe.pattern("SGS");
 			recipe.pattern("GFG");
 			recipe.pattern("SGS");
@@ -260,7 +258,7 @@ class Recipes {
 			recipe.define('G', ForestryTags.Items.GEARS_BRONZE);
 			recipe.define('E', Items.WITHER_ROSE);
 			recipe.define('I', ForestryTags.Items.INGOTS_BRONZE);
-			recipe.define('R', Tags.Items.DUSTS_REDSTONE);
+			recipe.define('R', CommonTags.DUSTS_REDSTONE);
 			recipe.pattern("ERE");
 			recipe.pattern("RFR");
 			recipe.pattern("IGI");
@@ -270,7 +268,7 @@ class Recipes {
 			recipe.define('G', ForestryTags.Items.GEARS_BRONZE);
 			recipe.define('D', Items.GLOWSTONE);
 			recipe.define('I', ForestryTags.Items.INGOTS_BRONZE);
-			recipe.define('R', Tags.Items.DUSTS_REDSTONE);
+			recipe.define('R', CommonTags.DUSTS_REDSTONE);
 			recipe.pattern("DRD");
 			recipe.pattern("RFR");
 			recipe.pattern("IGI");
@@ -278,9 +276,9 @@ class Recipes {
 		recipes.shapedCrafting(RecipeCategory.MISC, GItems.UPGRADE.item(GendustryUpgradeType.PRODUCTIVITY), recipe -> {
 			recipe.define('F', upgradeFrame);
 			recipe.define('G', ForestryTags.Items.GEARS_BRONZE);
-			recipe.define('D', Tags.Items.GEMS_EMERALD);
+			recipe.define('D', CommonTags.GEMS_EMERALD);
 			recipe.define('I', ForestryTags.Items.INGOTS_BRONZE);
-			recipe.define('R', Tags.Items.DUSTS_REDSTONE);
+			recipe.define('R', CommonTags.DUSTS_REDSTONE);
 			recipe.pattern("DRD");
 			recipe.pattern("RFR");
 			recipe.pattern("IGI");
@@ -290,7 +288,7 @@ class Recipes {
 			recipe.define('G', ForestryTags.Items.GEARS_BRONZE);
 			recipe.define('D', BEESWAX);
 			recipe.define('I', ForestryTags.Items.INGOTS_BRONZE);
-			recipe.define('R', Tags.Items.DUSTS_REDSTONE);
+			recipe.define('R', CommonTags.DUSTS_REDSTONE);
 			recipe.pattern("DRD");
 			recipe.pattern("RFR");
 			recipe.pattern("IGI");
@@ -298,7 +296,7 @@ class Recipes {
 		recipes.shapedCrafting(RecipeCategory.MISC, GItems.UPGRADE.item(GendustryUpgradeType.SIEVE), recipe -> {
 			recipe.define('F', upgradeFrame);
 			recipe.define('G', ForestryTags.Items.GEARS_BRONZE);
-			recipe.define('S', SILK_WISP.get());
+			recipe.define('S', SILK_WISP);
 			recipe.define('I', ForestryTags.Items.INGOTS_BRONZE);
 			recipe.pattern("SSS");
 			recipe.pattern("SFS");
@@ -306,7 +304,7 @@ class Recipes {
 		});
 		recipes.shapedCrafting(RecipeCategory.MISC, GItems.UPGRADE.item(GendustryUpgradeType.SKY), recipe -> {
 			recipe.define('F', upgradeFrame);
-			recipe.define('L', Tags.Items.GEMS_LAPIS);
+			recipe.define('L', CommonTags.GEMS_LAPIS);
 			recipe.define('I', ForestryTags.Items.INGOTS_BRONZE);
 			recipe.define('G', ForestryTags.Items.GEARS_BRONZE);
 			recipe.pattern("LLL");
@@ -317,7 +315,7 @@ class Recipes {
 			recipe.define('F', upgradeFrame);
 			recipe.define('I', ForestryTags.Items.INGOTS_BRONZE);
 			recipe.define('G', ForestryTags.Items.GEARS_BRONZE);
-			recipe.define('R', Tags.Items.DUSTS_REDSTONE);
+			recipe.define('R', CommonTags.DUSTS_REDSTONE);
 			recipe.define('P', GItems.RESOURCE.item(GendustryResourceType.GENETICS_PROCESSOR));
 			recipe.pattern("RPR");
 			recipe.pattern("RFR");
@@ -326,7 +324,7 @@ class Recipes {
 		recipes.shapedCrafting(RecipeCategory.MISC, GItems.UPGRADE.item(GendustryUpgradeType.TERRITORY), recipe -> {
 			recipe.define('F', upgradeFrame);
 			recipe.define('G', ForestryTags.Items.GEARS_BRONZE);
-			recipe.define('R', Tags.Items.DUSTS_REDSTONE);
+			recipe.define('R', CommonTags.DUSTS_REDSTONE);
 			recipe.define('B', Items.GRASS_BLOCK);
 			recipe.pattern("RBR");
 			recipe.pattern("BFB");
@@ -336,7 +334,7 @@ class Recipes {
 			recipe.define('F', upgradeFrame);
 			recipe.define('X', Items.REDSTONE_TORCH);
 			recipe.define('G', ForestryTags.Items.GEARS_BRONZE);
-			recipe.define('R', Tags.Items.DUSTS_REDSTONE);
+			recipe.define('R', CommonTags.DUSTS_REDSTONE);
 			recipe.define('P', GItems.RESOURCE.item(GendustryResourceType.GENETICS_PROCESSOR));
 			recipe.pattern("RPR");
 			recipe.pattern("RFR");
@@ -352,7 +350,7 @@ class Recipes {
 			recipe.define('P', GItems.RESOURCE.item(GendustryResourceType.GENETICS_PROCESSOR));
 			recipe.define('D', GFluids.LIQUID_DNA.getBucket());
 			recipe.define('M', GFluids.MUTAGEN.getBucket());
-			recipe.define('R', Tags.Items.DUSTS_REDSTONE);
+			recipe.define('R', CommonTags.DUSTS_REDSTONE);
 			recipe.pattern("RMR");
 			recipe.pattern("PFP");
 			recipe.pattern("RDR");
@@ -362,7 +360,7 @@ class Recipes {
 			recipe.define('S', GItems.UPGRADE.item(GendustryUpgradeType.SKY));
 			recipe.define('W', GItems.UPGRADE.item(GendustryUpgradeType.WEATHERPROOF));
 			recipe.define('L', GItems.UPGRADE.item(GendustryUpgradeType.LIGHTING));
-			recipe.define('R', Tags.Items.DUSTS_REDSTONE);
+			recipe.define('R', CommonTags.DUSTS_REDSTONE);
 			recipe.define('I', ForestryTags.Items.INGOTS_BRONZE);
 			recipe.define('G', ForestryTags.Items.GEARS_BRONZE);
 
@@ -373,7 +371,7 @@ class Recipes {
 		recipes.shapedCrafting(RecipeCategory.MISC, GItems.ELITE_UPGRADE.item(EliteGendustryUpgradeType.PRODUCTIVITY), recipe -> {
 			recipe.define('F', upgradeFrame);
 			recipe.define('G', ForestryTags.Items.GEARS_BRONZE);
-			recipe.define('D', Tags.Items.GEMS_EMERALD);
+			recipe.define('D', CommonTags.GEMS_EMERALD);
 			recipe.define('C', POLLEN_CLUSTER);
 			recipe.define('R', ROYAL_JELLY);
 			recipe.pattern("DRD");
@@ -383,7 +381,7 @@ class Recipes {
 		recipes.shapedCrafting(RecipeCategory.MISC, GItems.ELITE_UPGRADE.item(EliteGendustryUpgradeType.TERRITORY), recipe -> {
 			recipe.define('F', upgradeFrame);
 			recipe.define('G', ForestryTags.Items.GEARS_BRONZE);
-			recipe.define('R', Tags.Items.DUSTS_REDSTONE);
+			recipe.define('R', CommonTags.DUSTS_REDSTONE);
 			recipe.define('B', Items.GRASS_BLOCK);
 			recipe.pattern("RBR");
 			recipe.pattern("BFB");
@@ -392,7 +390,7 @@ class Recipes {
 		recipes.shapedCrafting(RecipeCategory.MISC, GItems.ELITE_UPGRADE.item(EliteGendustryUpgradeType.YOUTH), recipe -> {
 			recipe.define('F', upgradeFrame);
 			recipe.define('T', Items.GHAST_TEAR);
-			recipe.define('R', Tags.Items.DUSTS_REDSTONE);
+			recipe.define('R', CommonTags.DUSTS_REDSTONE);
 			recipe.define('G', ForestryTags.Items.GEARS_BRONZE);
 			recipe.define('I', ForestryTags.Items.INGOTS_BRONZE);
 			recipe.pattern("TRT");
@@ -404,7 +402,7 @@ class Recipes {
 			recipe.define('P', GItems.RESOURCE.item(GendustryResourceType.GENETICS_PROCESSOR));
 			recipe.define('D', GFluids.LIQUID_DNA.getBucket());
 			recipe.define('M', GFluids.PROTEIN.getBucket());
-			recipe.define('R', Tags.Items.DUSTS_REDSTONE);
+			recipe.define('R', CommonTags.DUSTS_REDSTONE);
 			recipe.pattern("RMR");
 			recipe.pattern("PFP");
 			recipe.pattern("RDR");
@@ -414,7 +412,7 @@ class Recipes {
 	private static void machineCraftingRecipes(MKRecipeProvider recipes) {
 		recipes.shapedCrafting(RecipeCategory.MISC, GBlocks.MACHINE.get(GendustryMachineType.INDUSTRIAL_APIARY), recipe -> {
 			recipe.define('G', ForestryTags.Items.GEARS_BRONZE);
-			recipe.define('C', Tags.Items.GLASS);
+			recipe.define('C', CommonTags.GLASS);
 			recipe.define('S', STURDY_CASING);
 			recipe.define('P', Items.PISTON);
 			recipe.define('R', GItems.RESOURCE.item(GendustryResourceType.RECEPTACLE));
@@ -459,7 +457,7 @@ class Recipes {
 			recipe.define('H', GItems.RESOURCE.item(GendustryResourceType.GENETICS_PROCESSOR));
 			recipe.define('P', GItems.RESOURCE.item(GendustryResourceType.RECEPTACLE));
 			recipe.define('M', GItems.RESOURCE.item(GendustryResourceType.POWER_MODULE));
-			recipe.define('D', Tags.Items.GEMS_DIAMOND);
+			recipe.define('D', CommonTags.GEMS_DIAMOND);
 			recipe.pattern("GHG");
 			recipe.pattern("PSD");
 			recipe.pattern("GMG");
@@ -478,7 +476,7 @@ class Recipes {
 		recipes.shapedCrafting(RecipeCategory.MISC, GBlocks.MACHINE.get(GendustryMachineType.ADVANCED_MUTATRON), recipe -> {
 			recipe.define('G', ForestryTags.Items.GEARS_BRONZE);
 			recipe.define('S', GBlocks.MACHINE.get(GendustryMachineType.MUTATRON));
-			recipe.define('H', Tags.Items.GEMS_QUARTZ);
+			recipe.define('H', CommonTags.GEMS_QUARTZ);
 			recipe.define('P', GItems.RESOURCE.item(GendustryResourceType.GENETICS_PROCESSOR));
 			recipe.define('M', GItems.RESOURCE.item(GendustryResourceType.POWER_MODULE));
 			recipe.pattern("GHG");

@@ -7,9 +7,9 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.inventory.Slot;
 
-import forestry.core.config.Constants;
-import forestry.core.gui.buttons.GuiBetterButton;
-import forestry.core.gui.buttons.StandardButtonTextureSets;
+import forestry.core.platform.config.Constants;
+import forestry.core.platform.gui.buttons.GuiBetterButton;
+import forestry.core.platform.gui.buttons.StandardButtonTextureSets;
 
 import org.jetbrains.annotations.Nullable;
 import thedarkcolour.gendustry.Gendustry;

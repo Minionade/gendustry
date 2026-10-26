@@ -3,7 +3,7 @@ package thedarkcolour.gendustry.blockentity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
-import forestry.core.inventory.InventoryAdapterTile;
+import forestry.core.platform.inventory.InventoryAdapterTile;
 
 import thedarkcolour.gendustry.item.GendustryResourceType;
 import thedarkcolour.gendustry.registry.GItems;

@@ -7,10 +7,10 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 
-import net.minecraftforge.items.ItemHandlerHelper;
+import net.neoforged.neoforge.items.ItemHandlerHelper;
 
 import forestry.api.core.IErrorLogic;
-import forestry.core.tiles.TilePowered;
+import forestry.core.platform.tile.TilePowered;
 
 import thedarkcolour.gendustry.compat.forestry.GendustryError;
 import thedarkcolour.gendustry.menu.ThreeInputMenu;
@@ -29,7 +29,7 @@ public class GeneticTransposerBlockEntity extends TilePowered implements IHintTi
 		this.inventory = new GeneticTransposerInventory(this);
 		setInternalInventory(this.inventory);
 
-		setTicksPerWorkCycle(20);
+		setStepsPerWorkCycle(4);
 		setEnergyPerWorkCycle(50000);
 	}
 

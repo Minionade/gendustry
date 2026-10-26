@@ -6,9 +6,9 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 
-import forestry.core.config.Constants;
-import forestry.core.gui.GuiForestryTitled;
-import forestry.core.tiles.TilePowered;
+import forestry.core.platform.config.Constants;
+import forestry.core.platform.gui.GuiForestryTitled;
+import forestry.core.platform.tile.TilePowered;
 
 import thedarkcolour.gendustry.Gendustry;
 import thedarkcolour.gendustry.blockentity.GeneticTransposerBlockEntity;

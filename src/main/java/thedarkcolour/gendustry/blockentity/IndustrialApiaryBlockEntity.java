@@ -8,7 +8,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -20,10 +21,8 @@ import net.minecraft.world.phys.Vec3;
 
 import com.mojang.authlib.GameProfile;
 
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.ItemHandlerHelper;
+import net.neoforged.neoforge.energy.IEnergyStorage;
+import net.neoforged.neoforge.items.ItemHandlerHelper;
 
 import forestry.api.IForestryApi;
 import forestry.api.apiculture.IBeeHousing;
@@ -33,24 +32,24 @@ import forestry.api.apiculture.IBeeModifier;
 import forestry.api.apiculture.IBeekeepingLogic;
 import forestry.api.apiculture.genetics.BeeLifeStage;
 import forestry.api.apiculture.genetics.IBee;
-import forestry.api.climate.ClimateState;
-import forestry.api.climate.IClimateProvider;
+import forestry.api.core.climate.ClimateState;
+import forestry.api.core.climate.IClimateProvider;
 import forestry.api.core.ForestryError;
 import forestry.api.core.HumidityType;
 import forestry.api.core.IErrorLogic;
 import forestry.api.core.TemperatureType;
-import forestry.api.genetics.capability.IIndividualHandlerItem;
-import forestry.api.genetics.pollen.IPollen;
-import forestry.apiculture.gui.IGuiBeeHousingDelegate;
-import forestry.core.network.IStreamableGui;
-import forestry.core.owner.IOwnedTile;
-import forestry.core.owner.IOwnerHandler;
-import forestry.core.owner.OwnerHandler;
-import forestry.core.tiles.IPowerHandler;
-import forestry.core.tiles.TileBase;
-import forestry.core.utils.NetworkUtil;
-import forestry.energy.EnergyHelper;
-import forestry.energy.ForestryEnergyStorage;
+import forestry.api.core.genetics.capability.IIndividualHandlerItem;
+import forestry.api.core.genetics.pollen.IPollen;
+import forestry.apiculture.bees.IGuiBeeHousingDelegate;
+import forestry.core.platform.network.IStreamableGui;
+import forestry.core.platform.owner.IOwnedTile;
+import forestry.core.platform.owner.IOwnerHandler;
+import forestry.core.platform.owner.OwnerHandler;
+import forestry.core.platform.tile.IPowerHandler;
+import forestry.core.platform.tile.TileBase;
+import forestry.core.platform.util.NetworkUtil;
+import forestry.core.content.energy.EnergyHelper;
+import forestry.core.content.energy.ForestryEnergyStorage;
 
 import org.jetbrains.annotations.Nullable;
 import thedarkcolour.gendustry.menu.IndustrialApiaryMenu;
@@ -62,7 +61,6 @@ public class IndustrialApiaryBlockEntity extends TileBase implements IBeeHousing
 
 	// Energy
 	private final ForestryEnergyStorage energyStorage;
-	private final LazyOptional<ForestryEnergyStorage> energyCap;
 	// Inventory
 	private final IndustrialApiaryInventory inventory;
 	// Beekeeping logic
@@ -80,7 +78,6 @@ public class IndustrialApiaryBlockEntity extends TileBase implements IBeeHousing
 		super(GBlockEntities.INDUSTRIAL_APIARY.tileType(), pos, state);
 
 		this.energyStorage = new ForestryEnergyStorage(100000, 1000000);
-		this.energyCap = LazyOptional.of(() -> this.energyStorage);
 		this.inventory = new IndustrialApiaryInventory(this);
 		setInternalInventory(this.inventory);
 		this.ownerHandler = new OwnerHandler();
@@ -231,30 +228,30 @@ public class IndustrialApiaryBlockEntity extends TileBase implements IBeeHousing
 	}
 
 	@Override
-	public void writeGuiData(FriendlyByteBuf data) {
+	public void writeGuiData(RegistryFriendlyByteBuf data) {
 		this.energyStorage.writeData(data);
 		data.writeVarInt(this.beeLogic.getBeeProgressPercent());
 		NetworkUtil.writeClimateState(data, this.climate);
 	}
 
 	@Override
-	public void readGuiData(FriendlyByteBuf data) {
+	public void readGuiData(RegistryFriendlyByteBuf data) {
 		this.energyStorage.readData(data);
 		this.breedingProgressPercent = data.readVarInt();
 		this.climate = NetworkUtil.readClimateState(data);
 	}
 
 	@Override
-	public void load(CompoundTag data) {
-		super.load(data);
+	public void loadAdditional(CompoundTag data, HolderLookup.Provider registries) {
+		super.loadAdditional(data, registries);
 		this.energyStorage.read(data);
 		this.beeLogic.read(data);
 		this.ownerHandler.read(data);
 	}
 
 	@Override
-	public void saveAdditional(CompoundTag data) {
-		super.saveAdditional(data);
+	public void saveAdditional(CompoundTag data, HolderLookup.Provider registries) {
+		super.saveAdditional(data, registries);
 		this.energyStorage.write(data);
 		this.beeLogic.write(data);
 		this.ownerHandler.write(data);
@@ -347,7 +344,7 @@ public class IndustrialApiaryBlockEntity extends TileBase implements IBeeHousing
 	}
 
 	@Override
-	public <T> LazyOptional<T> getCapability(Capability<T> capability, @Nullable Direction facing) {
-		return !this.remove && capability == ForgeCapabilities.ENERGY ? this.energyCap.cast() : super.getCapability(capability, facing);
+	public IEnergyStorage getEnergyHandler(@Nullable Direction facing) {
+		return this.energyStorage;
 	}
 }

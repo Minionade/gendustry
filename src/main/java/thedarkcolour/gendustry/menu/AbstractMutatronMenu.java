@@ -3,10 +3,10 @@ package thedarkcolour.gendustry.menu;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.MenuType;
 
-import forestry.core.gui.ContainerLiquidTanks;
-import forestry.core.gui.slots.SlotFiltered;
-import forestry.core.gui.slots.SlotLiquidIn;
-import forestry.core.gui.slots.SlotOutput;
+import forestry.core.platform.gui.ContainerLiquidTanks;
+import forestry.core.platform.gui.slots.SlotFiltered;
+import forestry.core.platform.gui.slots.SlotLiquidIn;
+import forestry.core.platform.gui.slots.SlotOutput;
 
 import thedarkcolour.gendustry.blockentity.AbstractMutatronBlockEntity;
 import thedarkcolour.gendustry.blockentity.MutatronInventory;

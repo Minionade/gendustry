@@ -3,11 +3,11 @@ package thedarkcolour.gendustry.data;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 
-import net.minecraftforge.client.model.generators.BlockModelBuilder;
-import net.minecraftforge.client.model.generators.ConfiguredModel;
-import net.minecraftforge.client.model.generators.ModelFile;
+import net.neoforged.neoforge.client.model.generators.BlockModelBuilder;
+import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
+import net.neoforged.neoforge.client.model.generators.ModelFile;
 
-import forestry.modules.features.FeatureBlock;
+import forestry.core.platform.registration.FeatureBlock;
 
 import thedarkcolour.gendustry.block.GendustryMachineType;
 import thedarkcolour.gendustry.registry.GBlocks;

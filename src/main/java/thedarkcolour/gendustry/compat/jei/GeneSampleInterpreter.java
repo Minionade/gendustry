@@ -1,7 +1,9 @@
 package thedarkcolour.gendustry.compat.jei;
 
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.CustomData;
 
 import mezz.jei.api.ingredients.subtypes.IIngredientSubtypeInterpreter;
 import mezz.jei.api.ingredients.subtypes.UidContext;
@@ -14,8 +16,9 @@ class GeneSampleInterpreter implements IIngredientSubtypeInterpreter<ItemStack> 
 			return "written";
 		}
 
-		if (ingredient.hasTag()) {
-			CompoundTag nbt = ingredient.getTag();
+		CustomData data = ingredient.get(DataComponents.CUSTOM_DATA);
+		if (data != null) {
+			CompoundTag nbt = data.copyTag();
 
 			if (nbt.contains("speciesType") && nbt.contains("chromosome") && nbt.contains("allele")) {
 				return nbt.getString("speciesType") + nbt.getString("chromosome") + nbt.getString("allele");

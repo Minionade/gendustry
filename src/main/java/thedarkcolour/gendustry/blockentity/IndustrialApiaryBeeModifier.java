@@ -6,9 +6,9 @@ import net.minecraft.world.item.ItemStack;
 
 import forestry.api.apiculture.IBeeModifier;
 import forestry.api.apiculture.genetics.IBeeSpecies;
-import forestry.api.genetics.IGenome;
-import forestry.api.genetics.IMutation;
-import forestry.core.inventory.IInventoryAdapter;
+import forestry.api.core.genetics.IGenome;
+import forestry.api.core.genetics.IMutation;
+import forestry.api.core.IInventoryAdapter;
 
 import org.jetbrains.annotations.Nullable;
 import thedarkcolour.gendustry.item.EliteGendustryUpgradeType;
