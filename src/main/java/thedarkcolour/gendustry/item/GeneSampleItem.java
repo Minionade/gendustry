@@ -81,7 +81,8 @@ public class GeneSampleItem extends SpeciesTypeItem {
 
 	@SuppressWarnings({"rawtypes", "unchecked"})
 	static String encodeValue(IChromosome chromosome, Allele allele) {
-		return chromosome.valueCodec().encodeStart(JsonOps.INSTANCE, allele.value()).result().map(json -> json.toString()).orElse("");
+		Object encoded = chromosome.valueCodec().encodeStart(JsonOps.INSTANCE, allele.value()).result().orElse(null);
+		return encoded == null ? "" : encoded.toString();
 	}
 
 	@SuppressWarnings({"rawtypes", "unchecked"})
