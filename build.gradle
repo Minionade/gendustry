@@ -97,16 +97,16 @@ configurations {
 
 dependencies {
 	// JEI OPTIONAL
-	modCompileOnly "mezz.jei:jei-$minecraftVersion-common-api:$jeiVersion"
-	modCompileOnly "mezz.jei:jei-$minecraftVersion-neoforge-api:$jeiVersion"
-	modRuntimeOnly "mezz.jei:jei-$minecraftVersion-neoforge:$jeiVersion"
+	compileOnly "mezz.jei:jei-$minecraftVersion-common-api:$jeiVersion"
+	compileOnly "mezz.jei:jei-$minecraftVersion-neoforge-api:$jeiVersion"
+	runtimeOnly "mezz.jei:jei-$minecraftVersion-neoforge:$jeiVersion"
 	// PATCHOULI REQUIRED
-	modCompileOnly "vazkii.patchouli:Patchouli:$patchouliVersion-NEOFORGE:api"
-	modRuntimeOnly "vazkii.patchouli:Patchouli:$patchouliVersion-NEOFORGE"
+	compileOnly "vazkii.patchouli:Patchouli:$patchouliVersion-NEOFORGE:api"
+	runtimeOnly "vazkii.patchouli:Patchouli:$patchouliVersion-NEOFORGE"
 	// ModKit is a datagen-only dependency, matching Forestry's 1.21.1 setup.
 	modkit 'com.github.thedarkcolour:ModKit:c0c491b35bf7c5785b933b27966a9c0b9dee4163'
 	// FORESTRY REQUIRED
-	modImplementation "maven.modrinth:forestry-community-edition:$forestryVersion"
+	implementation "maven.modrinth:forestry-community-edition:$forestryVersion"
 	// DEV ONLY
 	compileOnly 'org.jetbrains:annotations:23.0.0'
 }
