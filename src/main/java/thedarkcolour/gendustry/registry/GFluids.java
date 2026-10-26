@@ -36,7 +36,7 @@ public enum GFluids {
 				.bucket(this::getBucket)
 				.create();
 		this.bucket = registry
-				.item(() -> new BucketItem(this::fluid, new Item.Properties()
+				.item(() -> new BucketItem(this.fluid(), new Item.Properties()
 								.craftRemainder(Items.BUCKET)
 								.stacksTo(1)),
 						"bucket_" + name().toLowerCase(Locale.ENGLISH)
