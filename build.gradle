@@ -106,7 +106,7 @@ dependencies {
 	// ModKit is a datagen-only dependency, matching Forestry's 1.21.1 setup.
 	modkit 'com.github.thedarkcolour:ModKit:c0c491b35bf7c5785b933b27966a9c0b9dee4163'
 	// FORESTRY REQUIRED
-	implementation "maven.modrinth:forestry-community-edition:$forestryVersion"
+	implementation "curse.maven:forestry-community-edition-1056828:8782913"
 	// DEV ONLY
 	compileOnly 'org.jetbrains:annotations:23.0.0'
 }
