@@ -9,11 +9,11 @@ import java.util.Map;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.Item;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.Level;
 
 import forestry.api.core.genetics.ISpeciesType;
 import forestry.api.core.genetics.alleles.Allele;
@@ -69,7 +69,7 @@ public class GeneticTemplateItem extends SpeciesTypeItem {
 	}
 
 	@Override
-	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+	public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
 		ISpeciesType<?, ?> speciesType = getSpeciesType(stack);
 		if (speciesType == null) return;
 
