@@ -22,7 +22,6 @@ import net.minecraft.world.phys.Vec3;
 import com.mojang.authlib.GameProfile;
 
 import net.neoforged.neoforge.energy.IEnergyStorage;
-import net.neoforged.neoforge.items.ItemHandlerHelper;
 
 import forestry.api.IForestryApi;
 import forestry.api.apiculture.IBeeHousing;
@@ -150,7 +149,7 @@ public class IndustrialApiaryBlockEntity extends TileBase implements IBeeHousing
 						// Replenish drones
 						int free = drone.getMaxStackSize() - drone.getCount();
 
-						if (free > 0 && ItemHandlerHelper.canItemStacksStack(drone, stack)) {
+						if (free > 0 && ItemStack.isSameItemSameComponents(drone, stack)) {
 							int taken = Math.min(stack.getCount(), free);
 							stack.shrink(taken);
 							ItemStack newDrone = drone.copyWithCount(drone.getCount() + taken);
@@ -244,17 +243,17 @@ public class IndustrialApiaryBlockEntity extends TileBase implements IBeeHousing
 	@Override
 	public void loadAdditional(CompoundTag data, HolderLookup.Provider registries) {
 		super.loadAdditional(data, registries);
-		this.energyStorage.read(data);
-		this.beeLogic.read(data);
-		this.ownerHandler.read(data);
+		this.energyStorage.read(data, registries);
+		this.beeLogic.read(data, registries);
+		this.ownerHandler.read(data, registries);
 	}
 
 	@Override
 	public void saveAdditional(CompoundTag data, HolderLookup.Provider registries) {
 		super.saveAdditional(data, registries);
-		this.energyStorage.write(data);
-		this.beeLogic.write(data);
-		this.ownerHandler.write(data);
+		this.energyStorage.write(data, registries);
+		this.beeLogic.write(data, registries);
+		this.ownerHandler.write(data, registries);
 	}
 
 	@Override
@@ -343,7 +342,6 @@ public class IndustrialApiaryBlockEntity extends TileBase implements IBeeHousing
 		return this.energyStorage;
 	}
 
-	@Override
 	public IEnergyStorage getEnergyHandler(@Nullable Direction facing) {
 		return this.energyStorage;
 	}
