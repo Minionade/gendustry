@@ -18,6 +18,6 @@ public class GBlocks {
 
 	public static final FeatureBlockGroup<GendustryMachineBlock, GendustryMachineType> MACHINE = REGISTRY
 			.blockGroup(GendustryMachineBlock::new, GendustryMachineType.values())
-			.item(b -> new BlockItem(b, new Item.Properties()))
+			.item((block, properties) -> new BlockItem(block, properties))
 			.create();
 }
