@@ -24,7 +24,7 @@ public class GCreativeTabs {
 	public static final FeatureCreativeTab GENDUSTRY = REGISTRY.creativeTab("gendustry", tab -> {
 		tab.icon(() -> GBlocks.MACHINE.stack(GendustryMachineType.INDUSTRIAL_APIARY));
 		tab.displayItems(GCreativeTabs::addGendustryItems);
-		tab.withTabsBefore(ForestryCreativeTabs.MAIL.getKey());
+		tab.withTabsBefore(ForestryCreativeTabs.tabKey("mail"));
 		tab.withTabsAfter(GCreativeTabs.GENE_SAMPLES.getKey());
 	});
 
@@ -35,7 +35,7 @@ public class GCreativeTabs {
 	});
 
 	private static void addGendustryItems(CreativeModeTab.ItemDisplayParameters params, CreativeModeTab.Output items) {
-		GBlocks.MACHINE.getBlocks().forEach(items::accept);
+		GBlocks.MACHINE.getList().forEach(items::accept);
 		items.accept(GItems.POLLEN_KIT);
 		items.accept(GFluids.MUTAGEN.getBucket());
 		items.accept(GFluids.LIQUID_DNA.getBucket());
