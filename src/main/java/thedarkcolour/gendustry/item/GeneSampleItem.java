@@ -10,13 +10,13 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.CustomData;
-import net.minecraft.world.level.Level;
 
 import forestry.api.core.genetics.ISpeciesType;
 import forestry.api.core.genetics.alleles.Allele;
@@ -65,7 +65,7 @@ public class GeneSampleItem extends SpeciesTypeItem {
 	}
 
 	@Override
-	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag advanced) {
+	public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag advanced) {
 		IChromosome<?> chromosome = getChromosome(stack);
 		Allele<?> allele = getAllele(stack);
 		if (chromosome != null && allele != null) {
@@ -75,13 +75,13 @@ public class GeneSampleItem extends SpeciesTypeItem {
 	}
 
 	@SuppressWarnings({"rawtypes", "unchecked"})
-	static Component displayAllele(IChromosome chromosome, Allele allele) {
+	static MutableComponent displayAllele(IChromosome chromosome, Allele allele) {
 		return Component.translatable(chromosome.translationKey(allele.value()));
 	}
 
 	@SuppressWarnings({"rawtypes", "unchecked"})
 	static String encodeValue(IChromosome chromosome, Allele allele) {
-		return chromosome.valueCodec().encodeStart(JsonOps.INSTANCE, allele.value()).result().map(JsonElement::toString).orElse("");
+		return chromosome.valueCodec().encodeStart(JsonOps.INSTANCE, allele.value()).result().map(json -> json.toString()).orElse("");
 	}
 
 	@SuppressWarnings({"rawtypes", "unchecked"})
