@@ -1,9 +1,7 @@
 package thedarkcolour.gendustry.data;
 
-import java.util.function.Consumer;
-
-import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
@@ -29,9 +27,9 @@ import thedarkcolour.gendustry.block.GendustryMachineType;
 import thedarkcolour.gendustry.item.EliteGendustryUpgradeType;
 import thedarkcolour.gendustry.item.GendustryResourceType;
 import thedarkcolour.gendustry.item.GendustryUpgradeType;
-import thedarkcolour.gendustry.recipe.DnaFinishedRecipe;
-import thedarkcolour.gendustry.recipe.MutagenFinishedRecipe;
-import thedarkcolour.gendustry.recipe.ProteinFinishedRecipe;
+import thedarkcolour.gendustry.recipe.DnaRecipe;
+import thedarkcolour.gendustry.recipe.MutagenRecipe;
+import thedarkcolour.gendustry.recipe.ProteinRecipe;
 import thedarkcolour.gendustry.registry.GBlocks;
 import thedarkcolour.gendustry.registry.GFluids;
 import thedarkcolour.gendustry.registry.GItems;
@@ -45,9 +43,9 @@ class Recipes {
 	private static final Item POLLEN_CLUSTER = BuiltInRegistries.ITEM.get(ForestryConstants.forestry("pollen_cluster_normal"));
 	private static final Item STURDY_CASING = BuiltInRegistries.ITEM.get(ForestryConstants.forestry("sturdy_machine"));
 
-	static void addRecipes(Consumer<FinishedRecipe> writer, MKRecipeProvider recipes) {
+	static void addRecipes(RecipeOutput writer, MKRecipeProvider recipes) {
 		// Genetic Template
-		recipes.special("combine_genetic_template", GRecipeTypes.GENETIC_TEMPLATE_SERIALIZER);
+		recipes.special("combine_genetic_template", category -> new thedarkcolour.gendustry.recipe.GeneticTemplateRecipe(category));
 
 		// Mutagen recipes
 		mutagen(writer, Items.REDSTONE, 100);
@@ -514,15 +512,18 @@ class Recipes {
 		});
 	}
 
-	private static void mutagen(Consumer<FinishedRecipe> writer, Item input, int mutagen) {
-		writer.accept(new MutagenFinishedRecipe(Gendustry.loc("mutagen/" + MKRecipeProvider.path(input)), Ingredient.of(input), mutagen));
+	private static void mutagen(RecipeOutput writer, Item input, int mutagen) {
+		ResourceLocation id = Gendustry.loc("mutagen/" + MKRecipeProvider.path(input));
+		writer.accept(id, new MutagenRecipe(id, Ingredient.of(input), mutagen), null);
 	}
 
-	private static void protein(Consumer<FinishedRecipe> writer, Item input, int protein) {
-		writer.accept(new ProteinFinishedRecipe(Gendustry.loc("protein/" + MKRecipeProvider.path(input)), Ingredient.of(input), protein));
+	private static void protein(RecipeOutput writer, Item input, int protein) {
+		ResourceLocation id = Gendustry.loc("protein/" + MKRecipeProvider.path(input));
+		writer.accept(id, new ProteinRecipe(id, Ingredient.of(input), protein), null);
 	}
 
-	private static void dna(Consumer<FinishedRecipe> writer, ResourceLocation speciesType, ILifeStage input, int dna) {
-		writer.accept(new DnaFinishedRecipe(Gendustry.loc("dna/" + input.getSerializedName()), IForestryApi.INSTANCE.getGeneticManager().getSpeciesType(speciesType), input, dna));
+	private static void dna(RecipeOutput writer, ResourceLocation speciesType, ILifeStage input, int dna) {
+		ResourceLocation id = Gendustry.loc("dna/" + input.getSerializedName());
+		writer.accept(id, new DnaRecipe(id, IForestryApi.INSTANCE.getGeneticManager().getSpeciesType(speciesType), input, dna), null);
 	}
 }
