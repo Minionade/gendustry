@@ -32,8 +32,7 @@ public class DnaExtractorBlockEntity extends ProducerBlockEntity<DnaExtractorBlo
 	@Nullable
 	@Override
 	public DnaRecipe getRecipe(ItemStack input) {
-		IIndividualHandlerItem handler = IIndividualHandlerItem.get(input);
-		return handler == null ? null : DnaRecipeCache.INSTANCE.getRecipe(handler.getStage());
+		return DnaRecipeCache.INSTANCE.getRecipe(IIndividualHandlerItem.getLifeStage(input));
 	}
 
 	@Override
