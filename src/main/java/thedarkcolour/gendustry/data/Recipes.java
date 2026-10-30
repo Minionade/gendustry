@@ -41,7 +41,7 @@ class Recipes {
 	private static final Item BEESWAX = BuiltInRegistries.ITEM.get(ForestryConstants.forestry("beeswax"));
 	private static final Item ROYAL_JELLY = BuiltInRegistries.ITEM.get(ForestryConstants.forestry("royal_jelly"));
 	private static final Item POLLEN_CLUSTER = BuiltInRegistries.ITEM.get(ForestryConstants.forestry("pollen_cluster_normal"));
-	private static final Item STURDY_CASING = BuiltInRegistries.ITEM.get(ForestryConstants.forestry("sturdy_machine"));
+	private static final Item STURDY_CASING = BuiltInRegistries.ITEM.get(ForestryConstants.forestry("sturdy_casing"));
 
 	static void addRecipes(RecipeOutput writer, MKRecipeProvider recipes) {
 		// Genetic Template
