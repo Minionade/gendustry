@@ -1,3 +1,9 @@
+## Gendustry 1.0.8
+- Fixed machine recipes for current Forestry (Sturdy Casing, Pollen Cluster, glass and string tags)
+- Fixed crash when placing Mutagen, Liquid DNA or Protein buckets
+- Regenerated recipe data in the 1.21.1 format
+- Butterfly DNA recipes now load only when the Forestry Butterflies add-on is installed
+
 ## Gendustry 1.0.5
 - Fixed incorrect tooltip for Sieve Upgrade (#3)
 - Fix not being able to extract items from Imprinter (#3)
