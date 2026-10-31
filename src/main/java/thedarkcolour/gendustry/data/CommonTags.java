@@ -12,7 +12,7 @@ final class CommonTags {
 	static final TagKey<Item> GEMS_EMERALD = item("gems/emerald");
 	static final TagKey<Item> GEMS_LAPIS = item("gems/lapis");
 	static final TagKey<Item> GEMS_QUARTZ = item("gems/quartz");
-	static final TagKey<Item> GLASS = item("glass_blocks");
+	static final TagKey<Item> GLASS = item("glass_blocks/colorless");
 	static final TagKey<Item> GLASS_PANES = item("glass_panes");
 	static final TagKey<Item> INGOTS_GOLD = item("ingots/gold");
 	static final TagKey<Item> MUSHROOMS = item("mushrooms");

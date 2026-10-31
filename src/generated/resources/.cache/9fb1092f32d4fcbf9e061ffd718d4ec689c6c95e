@@ -1,4 +1,4 @@
-// 1.21.1	2026-10-31T01:26:38.084565885	Recipes
+// 1.21.1	2026-10-31T08:08:14.397949319	Recipes
 f9bbc7af976ce26484003ee3937c44beef64d605 data/gendustry/advancement/recipes/misc/activity_simulator_elite_upgrade.json
 2aca39c7ae9f0926c99bd3a734e13b262c21d097 data/gendustry/advancement/recipes/misc/advanced_mutatron.json
 6d0ae5ee2d79977a04ceeb9bf55f919cf37bea66 data/gendustry/advancement/recipes/misc/automation_upgrade.json
@@ -70,7 +70,7 @@ fed2c96d2a71039a06072fffc84babdfec831c46 data/gendustry/recipe/heater_upgrade.js
 1827210c0276e6e8c595830277c38c37fe9fd518 data/gendustry/recipe/humidifier_upgrade.json
 cbf4fa4769858165b41736bbad2c9c42492dbc40 data/gendustry/recipe/immutable_upgrade.json
 148b77dfff963f5e62e11b65a9cef7a7b1d24975 data/gendustry/recipe/imprinter.json
-1497d47546545e3412fb46585ea4934c49748b28 data/gendustry/recipe/industrial_apiary.json
+3c4a323911f372315a7d4a89b7d584a24ddd15f6 data/gendustry/recipe/industrial_apiary.json
 0c4b9de3378bc40755a93b5610e41ff2d1dedfb9 data/gendustry/recipe/labware.json
 bebba6da3badc13ec81e2302aac5799c46563d96 data/gendustry/recipe/lifespan_upgrade.json
 d355b0247c60d3f8242f87c6397021778308ac3f data/gendustry/recipe/lighting_upgrade.json
