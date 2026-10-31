@@ -1,7 +1,7 @@
 {
   "type": "gendustry:dna",
   "amount": 500,
+  "id": "gendustry:dna/princess",
   "species_type": "forestry:bee_species",
-  "stage": "princess",
-  "id": "gendustry:dna/princess"
+  "stage": "princess"
 }

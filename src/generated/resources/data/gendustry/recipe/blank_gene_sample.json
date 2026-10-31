@@ -15,7 +15,7 @@
     " I "
   ],
   "result": {
-    "item": "gendustry:blank_gene_sample"
-  },
-  "show_notification": true
+    "count": 1,
+    "id": "gendustry:blank_gene_sample"
+  }
 }

@@ -1,0 +1,13 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "forestrybutterflies"
+    }
+  ],
+  "type": "gendustry:dna",
+  "amount": 1000,
+  "species_type": "forestry:butterfly_species",
+  "stage": "caterpillar",
+  "id": "gendustry:dna/caterpillar"
+}

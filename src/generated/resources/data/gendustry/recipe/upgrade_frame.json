@@ -19,7 +19,6 @@
   ],
   "result": {
     "count": 2,
-    "item": "gendustry:upgrade_frame"
-  },
-  "show_notification": true
+    "id": "gendustry:upgrade_frame"
+  }
 }

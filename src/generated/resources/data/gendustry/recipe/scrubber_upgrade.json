@@ -18,7 +18,7 @@
     "SGS"
   ],
   "result": {
-    "item": "gendustry:scrubber_upgrade"
-  },
-  "show_notification": true
+    "count": 1,
+    "id": "gendustry:scrubber_upgrade"
+  }
 }

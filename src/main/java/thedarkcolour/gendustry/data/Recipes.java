@@ -18,6 +18,7 @@ import forestry.api.apiculture.genetics.BeeLifeStage;
 import forestry.api.arboriculture.genetics.TreeLifeStage;
 import forestry.api.core.genetics.ForestrySpeciesTypes;
 import forestry.api.core.genetics.ILifeStage;
+import forestry.api.core.genetics.ISpeciesType;
 import forestry.api.lepidopterology.genetics.ButterflyLifeStage;
 import forestry.core.platform.item.ItemForestry;
 import forestry.core.platform.registration.FeatureItem;
@@ -523,7 +524,12 @@ class Recipes {
 	}
 
 	private static void dna(RecipeOutput writer, ResourceLocation speciesType, ILifeStage input, int dna) {
+		// Butterflies are a Forestry add-on, so their recipes are hand-written in src/main/resources with a mod_loaded condition
+		ISpeciesType<?, ?> type = IForestryApi.INSTANCE.getGeneticManager().getSpeciesTypeSafe(speciesType);
+		if (type == null) {
+			return;
+		}
 		ResourceLocation id = Gendustry.loc("dna/" + input.getSerializedName());
-		writer.accept(id, new DnaRecipe(id, IForestryApi.INSTANCE.getGeneticManager().getSpeciesType(speciesType), input, dna), null);
+		writer.accept(id, new DnaRecipe(id, type, input, dna), null);
 	}
 }

@@ -24,7 +24,7 @@
     "GMG"
   ],
   "result": {
-    "item": "gendustry:protein_liquefier"
-  },
-  "show_notification": true
+    "count": 1,
+    "id": "gendustry:protein_liquefier"
+  }
 }

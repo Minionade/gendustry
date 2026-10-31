@@ -24,7 +24,7 @@
     "IGI"
   ],
   "result": {
-    "item": "gendustry:weatherproof_upgrade"
-  },
-  "show_notification": true
+    "count": 1,
+    "id": "gendustry:weatherproof_upgrade"
+  }
 }

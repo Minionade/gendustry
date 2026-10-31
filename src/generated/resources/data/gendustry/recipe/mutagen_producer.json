@@ -27,7 +27,7 @@
     "GCG"
   ],
   "result": {
-    "item": "gendustry:mutagen_producer"
-  },
-  "show_notification": true
+    "count": 1,
+    "id": "gendustry:mutagen_producer"
+  }
 }

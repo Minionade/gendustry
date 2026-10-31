@@ -1,8 +1,8 @@
 {
   "type": "gendustry:protein",
   "amount": 250,
+  "id": "gendustry:protein/rabbit",
   "ingredient": {
     "item": "minecraft:rabbit"
-  },
-  "id": "gendustry:protein/rabbit"
+  }
 }

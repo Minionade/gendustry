@@ -24,7 +24,7 @@
     "GPG"
   ],
   "result": {
-    "item": "gendustry:industrial_apiary"
-  },
-  "show_notification": true
+    "count": 1,
+    "id": "gendustry:industrial_apiary"
+  }
 }

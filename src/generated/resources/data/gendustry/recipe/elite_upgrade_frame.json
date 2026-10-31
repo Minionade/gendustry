@@ -22,7 +22,6 @@
   ],
   "result": {
     "count": 2,
-    "item": "gendustry:elite_upgrade_frame"
-  },
-  "show_notification": true
+    "id": "gendustry:elite_upgrade_frame"
+  }
 }

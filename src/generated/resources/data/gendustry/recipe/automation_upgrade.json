@@ -21,7 +21,7 @@
     " C "
   ],
   "result": {
-    "item": "gendustry:automation_upgrade"
-  },
-  "show_notification": true
+    "count": 1,
+    "id": "gendustry:automation_upgrade"
+  }
 }

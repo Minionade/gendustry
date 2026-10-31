@@ -27,7 +27,7 @@
     "GMG"
   ],
   "result": {
-    "item": "gendustry:sampler"
-  },
-  "show_notification": true
+    "count": 1,
+    "id": "gendustry:sampler"
+  }
 }

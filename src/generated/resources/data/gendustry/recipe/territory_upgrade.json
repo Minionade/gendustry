@@ -21,7 +21,7 @@
     "RGR"
   ],
   "result": {
-    "item": "gendustry:territory_upgrade"
-  },
-  "show_notification": true
+    "count": 1,
+    "id": "gendustry:territory_upgrade"
+  }
 }

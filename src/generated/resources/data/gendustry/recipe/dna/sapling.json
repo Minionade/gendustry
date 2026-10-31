@@ -1,7 +1,7 @@
 {
   "type": "gendustry:dna",
   "amount": 100,
+  "id": "gendustry:dna/sapling",
   "species_type": "forestry:tree_species",
-  "stage": "sapling",
-  "id": "gendustry:dna/sapling"
+  "stage": "sapling"
 }

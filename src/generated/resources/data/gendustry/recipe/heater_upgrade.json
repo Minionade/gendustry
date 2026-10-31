@@ -21,7 +21,7 @@
     "ICI"
   ],
   "result": {
-    "item": "gendustry:heater_upgrade"
-  },
-  "show_notification": true
+    "count": 1,
+    "id": "gendustry:heater_upgrade"
+  }
 }

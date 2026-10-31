@@ -21,7 +21,7 @@
     "GHG"
   ],
   "result": {
-    "item": "gendustry:replicator"
-  },
-  "show_notification": true
+    "count": 1,
+    "id": "gendustry:replicator"
+  }
 }

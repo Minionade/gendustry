@@ -27,7 +27,7 @@
     "RCI"
   ],
   "result": {
-    "item": "gendustry:mutatron"
-  },
-  "show_notification": true
+    "count": 1,
+    "id": "gendustry:mutatron"
+  }
 }
