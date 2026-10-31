@@ -1,8 +1,8 @@
 {
   "type": "gendustry:mutagen",
   "amount": 200,
+  "id": "gendustry:mutagen/glowstone_dust",
   "ingredient": {
     "item": "minecraft:glowstone_dust"
-  },
-  "id": "gendustry:mutagen/glowstone_dust"
+  }
 }

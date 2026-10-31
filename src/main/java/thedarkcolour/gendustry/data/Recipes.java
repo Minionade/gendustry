@@ -18,6 +18,7 @@ import forestry.api.apiculture.genetics.BeeLifeStage;
 import forestry.api.arboriculture.genetics.TreeLifeStage;
 import forestry.api.core.genetics.ForestrySpeciesTypes;
 import forestry.api.core.genetics.ILifeStage;
+import forestry.api.core.genetics.ISpeciesType;
 import forestry.api.lepidopterology.genetics.ButterflyLifeStage;
 import forestry.core.platform.item.ItemForestry;
 import forestry.core.platform.registration.FeatureItem;
@@ -40,8 +41,8 @@ class Recipes {
 	private static final Item SILK_WISP = BuiltInRegistries.ITEM.get(ForestryConstants.forestry("silk_wisp"));
 	private static final Item BEESWAX = BuiltInRegistries.ITEM.get(ForestryConstants.forestry("beeswax"));
 	private static final Item ROYAL_JELLY = BuiltInRegistries.ITEM.get(ForestryConstants.forestry("royal_jelly"));
-	private static final Item POLLEN_CLUSTER = BuiltInRegistries.ITEM.get(ForestryConstants.forestry("pollen_cluster_normal"));
-	private static final Item STURDY_CASING = BuiltInRegistries.ITEM.get(ForestryConstants.forestry("sturdy_machine"));
+	private static final Item POLLEN_CLUSTER = BuiltInRegistries.ITEM.get(ForestryConstants.forestry("pollen_cluster"));
+	private static final Item STURDY_CASING = BuiltInRegistries.ITEM.get(ForestryConstants.forestry("sturdy_casing"));
 
 	static void addRecipes(RecipeOutput writer, MKRecipeProvider recipes) {
 		// Genetic Template
@@ -523,7 +524,12 @@ class Recipes {
 	}
 
 	private static void dna(RecipeOutput writer, ResourceLocation speciesType, ILifeStage input, int dna) {
+		// Butterflies are a Forestry add-on, so their recipes are hand-written in src/main/resources with a mod_loaded condition
+		ISpeciesType<?, ?> type = IForestryApi.INSTANCE.getGeneticManager().getSpeciesTypeSafe(speciesType);
+		if (type == null) {
+			return;
+		}
 		ResourceLocation id = Gendustry.loc("dna/" + input.getSerializedName());
-		writer.accept(id, new DnaRecipe(id, IForestryApi.INSTANCE.getGeneticManager().getSpeciesType(speciesType), input, dna), null);
+		writer.accept(id, new DnaRecipe(id, type, input, dna), null);
 	}
 }

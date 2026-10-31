@@ -24,7 +24,7 @@
     "IGI"
   ],
   "result": {
-    "item": "gendustry:youth_elite_upgrade"
-  },
-  "show_notification": true
+    "count": 1,
+    "id": "gendustry:youth_elite_upgrade"
+  }
 }

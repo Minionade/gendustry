@@ -18,7 +18,7 @@
       "item": "gendustry:receptacle"
     },
     "S": {
-      "item": "forestry:sturdy_machine"
+      "item": "forestry:sturdy_casing"
     }
   },
   "pattern": [
@@ -27,7 +27,7 @@
     "GMG"
   ],
   "result": {
-    "item": "gendustry:sampler"
-  },
-  "show_notification": true
+    "count": 1,
+    "id": "gendustry:sampler"
+  }
 }

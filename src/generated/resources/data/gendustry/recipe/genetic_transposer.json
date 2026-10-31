@@ -15,7 +15,7 @@
       "item": "gendustry:power_module"
     },
     "S": {
-      "item": "forestry:sturdy_machine"
+      "item": "forestry:sturdy_casing"
     }
   },
   "pattern": [
@@ -24,7 +24,7 @@
     "GMG"
   ],
   "result": {
-    "item": "gendustry:genetic_transposer"
-  },
-  "show_notification": true
+    "count": 1,
+    "id": "gendustry:genetic_transposer"
+  }
 }

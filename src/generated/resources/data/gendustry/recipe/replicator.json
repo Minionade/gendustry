@@ -12,7 +12,7 @@
       "item": "gendustry:power_module"
     },
     "S": {
-      "item": "forestry:sturdy_machine"
+      "item": "forestry:sturdy_casing"
     }
   },
   "pattern": [
@@ -21,7 +21,7 @@
     "GHG"
   ],
   "result": {
-    "item": "gendustry:replicator"
-  },
-  "show_notification": true
+    "count": 1,
+    "id": "gendustry:replicator"
+  }
 }

@@ -6,13 +6,14 @@
       "item": "gendustry:labware"
     },
     {
-      "tag": "c:string"
+      "tag": "c:strings"
     },
     {
       "item": "minecraft:paper"
     }
   ],
   "result": {
-    "item": "gendustry:pollen_kit"
+    "count": 1,
+    "id": "gendustry:pollen_kit"
   }
 }

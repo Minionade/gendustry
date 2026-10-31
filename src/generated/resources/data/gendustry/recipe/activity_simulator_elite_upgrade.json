@@ -30,7 +30,7 @@
     "IGI"
   ],
   "result": {
-    "item": "gendustry:activity_simulator_elite_upgrade"
-  },
-  "show_notification": true
+    "count": 1,
+    "id": "gendustry:activity_simulator_elite_upgrade"
+  }
 }

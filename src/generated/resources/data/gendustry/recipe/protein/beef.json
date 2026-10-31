@@ -1,8 +1,8 @@
 {
   "type": "gendustry:protein",
   "amount": 500,
+  "id": "gendustry:protein/beef",
   "ingredient": {
     "item": "minecraft:beef"
-  },
-  "id": "gendustry:protein/beef"
+  }
 }

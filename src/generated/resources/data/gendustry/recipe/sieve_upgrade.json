@@ -21,7 +21,7 @@
     "IGI"
   ],
   "result": {
-    "item": "gendustry:sieve_upgrade"
-  },
-  "show_notification": true
+    "count": 1,
+    "id": "gendustry:sieve_upgrade"
+  }
 }

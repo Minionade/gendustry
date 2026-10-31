@@ -24,7 +24,7 @@
     "GMG"
   ],
   "result": {
-    "item": "gendustry:advanced_mutatron"
-  },
-  "show_notification": true
+    "count": 1,
+    "id": "gendustry:advanced_mutatron"
+  }
 }

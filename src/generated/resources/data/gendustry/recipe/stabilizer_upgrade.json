@@ -24,7 +24,7 @@
     "GIG"
   ],
   "result": {
-    "item": "gendustry:stabilizer_upgrade"
-  },
-  "show_notification": true
+    "count": 1,
+    "id": "gendustry:stabilizer_upgrade"
+  }
 }

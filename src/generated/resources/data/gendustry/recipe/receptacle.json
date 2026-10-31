@@ -21,7 +21,7 @@
     "RGR"
   ],
   "result": {
-    "item": "gendustry:receptacle"
-  },
-  "show_notification": true
+    "count": 1,
+    "id": "gendustry:receptacle"
+  }
 }

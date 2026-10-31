@@ -27,7 +27,7 @@
     "IGI"
   ],
   "result": {
-    "item": "gendustry:nether_upgrade"
-  },
-  "show_notification": true
+    "count": 1,
+    "id": "gendustry:nether_upgrade"
+  }
 }

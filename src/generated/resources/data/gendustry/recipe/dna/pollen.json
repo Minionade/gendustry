@@ -1,7 +1,7 @@
 {
   "type": "gendustry:dna",
   "amount": 400,
+  "id": "gendustry:dna/pollen",
   "species_type": "forestry:tree_species",
-  "stage": "pollen",
-  "id": "gendustry:dna/pollen"
+  "stage": "pollen"
 }

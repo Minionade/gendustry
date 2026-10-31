@@ -21,7 +21,7 @@
     "ICI"
   ],
   "result": {
-    "item": "gendustry:humidifier_upgrade"
-  },
-  "show_notification": true
+    "count": 1,
+    "id": "gendustry:humidifier_upgrade"
+  }
 }

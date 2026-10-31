@@ -24,7 +24,7 @@
     "IGI"
   ],
   "result": {
-    "item": "gendustry:lighting_upgrade"
-  },
-  "show_notification": true
+    "count": 1,
+    "id": "gendustry:lighting_upgrade"
+  }
 }

@@ -3,7 +3,7 @@
   "category": "misc",
   "key": {
     "C": {
-      "item": "forestry:pollen_cluster_normal"
+      "item": "forestry:pollen_cluster"
     },
     "D": {
       "tag": "c:gems/emerald"
@@ -24,7 +24,7 @@
     "CGC"
   ],
   "result": {
-    "item": "gendustry:productivity_elite_upgrade"
-  },
-  "show_notification": true
+    "count": 1,
+    "id": "gendustry:productivity_elite_upgrade"
+  }
 }

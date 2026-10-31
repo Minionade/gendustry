@@ -21,7 +21,7 @@
     "ICI"
   ],
   "result": {
-    "item": "gendustry:cooler_upgrade"
-  },
-  "show_notification": true
+    "count": 1,
+    "id": "gendustry:cooler_upgrade"
+  }
 }

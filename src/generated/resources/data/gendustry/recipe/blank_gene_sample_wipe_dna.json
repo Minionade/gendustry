@@ -6,5 +6,8 @@
   "ingredient": {
     "item": "gendustry:gene_sample"
   },
-  "result": "gendustry:blank_gene_sample"
+  "result": {
+    "count": 1,
+    "id": "gendustry:blank_gene_sample"
+  }
 }

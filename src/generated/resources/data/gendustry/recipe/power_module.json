@@ -21,7 +21,7 @@
     "GIG"
   ],
   "result": {
-    "item": "gendustry:power_module"
-  },
-  "show_notification": true
+    "count": 1,
+    "id": "gendustry:power_module"
+  }
 }

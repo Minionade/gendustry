@@ -18,7 +18,7 @@
     "DQD"
   ],
   "result": {
-    "item": "gendustry:environmental_processor"
-  },
-  "show_notification": true
+    "count": 1,
+    "id": "gendustry:environmental_processor"
+  }
 }

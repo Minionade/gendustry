@@ -6,5 +6,8 @@
   "ingredient": {
     "item": "gendustry:genetic_template"
   },
-  "result": "gendustry:blank_genetic_template"
+  "result": {
+    "count": 1,
+    "id": "gendustry:blank_genetic_template"
+  }
 }
