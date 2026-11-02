@@ -1,3 +1,6 @@
+## Gendustry 1.0.9
+- Updated Forestry: Community Edition support to alpha9 while retaining compatibility with alpha8
+
 ## Gendustry 1.0.5
 - Fixed incorrect tooltip for Sieve Upgrade (#3)
 - Fix not being able to extract items from Imprinter (#3)
