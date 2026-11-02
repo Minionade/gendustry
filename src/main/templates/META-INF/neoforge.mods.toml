@@ -8,8 +8,9 @@ license="GNU GPLv3"
 	modId="gendustry"
 	version="${version}"
 	displayName="Gendustry"
+	logoFile="gendustry.png"
 	credits="blackdew, CrossVas, Spearkiller"
-	authors="thedarkcolour"
+	authors="Minionade, thedarkcolour"
 	description='''
 	Machines for manipulation of Forestry genetics.
 	'''
