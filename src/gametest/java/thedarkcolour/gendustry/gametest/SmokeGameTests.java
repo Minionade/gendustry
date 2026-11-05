@@ -91,8 +91,9 @@ public class SmokeGameTests {
 		ServerLevel level = helper.getLevel();
 		helper.assertValueEqual(count(level, GRecipeTypes.MUTAGEN.type()), 4, "mutagen recipe count");
 		helper.assertValueEqual(count(level, GRecipeTypes.PROTEIN.type()), 7, "protein recipe count");
-		// 6 non-butterfly stages: drone, princess, queen, larvae, sapling, pollen
-		helper.assertValueEqual(count(level, GRecipeTypes.DNA.type()), 6, "dna recipe count");
+		// 6 non-butterfly stages (drone, princess, queen, larvae, sapling, pollen), plus 4 when the butterfly add-on is present
+		boolean butterflies = net.neoforged.fml.ModList.get().isLoaded("forestrybutterflies");
+		helper.assertValueEqual(count(level, GRecipeTypes.DNA.type()), butterflies ? 10 : 6, "dna recipe count (butterflies loaded: " + butterflies + ")");
 		helper.succeed();
 	}
 

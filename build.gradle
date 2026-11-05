@@ -123,6 +123,11 @@ dependencies {
 	modkit 'com.github.thedarkcolour:ModKit:c0c491b35bf7c5785b933b27966a9c0b9dee4163'
 	// FORESTRY REQUIRED
 	implementation "curse.maven:forestry-community-edition-1056828:8782913"
+	// Optional add-on, only for testing butterfly support: ./gradlew runGameTestServer -PwithButterflies
+	if (project.hasProperty('withButterflies')) {
+		gametestRuntimeOnly 'maven.modrinth:forestry-ce-butterflies:g395Lbti'
+	}
+
 	// DEV ONLY
 	compileOnly 'org.jetbrains:annotations:23.0.0'
 }
