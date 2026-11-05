@@ -55,7 +55,7 @@ public class IndustrialApiaryInventory extends InventoryAdapterTile<IndustrialAp
 		if (this.tile.recycleQueen && IIndividualHandlerItem.filter(stack, (i, stage) -> stage == BeeLifeStage.PRINCESS || stage == BeeLifeStage.DRONE)) {
 			return false;
 		}
-		return OUTPUT_SLOT_START <= slotIndex && slotIndex < OUTPUT_SLOT_COUNT;
+		return OUTPUT_SLOT_START <= slotIndex && slotIndex < OUTPUT_SLOT_START + OUTPUT_SLOT_COUNT;
 	}
 
 	@Override

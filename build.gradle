@@ -13,6 +13,14 @@ base.archivesName = "gendustry-$minecraftVersion"
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
+sourceSets {
+	// Server-side GameTests (./gradlew runGameTestServer); never shipped in the release jar
+	gametest {
+		compileClasspath += sourceSets.main.compileClasspath + sourceSets.main.output
+		runtimeClasspath += sourceSets.main.runtimeClasspath + sourceSets.main.output
+	}
+}
+
 neoForge {
 	version = neoForgeVersion
 
@@ -42,6 +50,11 @@ neoForge {
 			programArgument '--nogui'
 		}
 
+		gameTestServer {
+			type = "gameTestServer"
+			gameDirectory.set(project.layout.projectDirectory.dir('run/gametest'))
+			systemProperty 'neoforge.enabledGameTestNamespaces', 'gendustry'
+		}
 		data {
 			data()
 			programArguments.addAll('--mod', 'gendustry', '--all', '--output', file('src/generated/resources/').absolutePath, '--existing', file('src/main/resources/').absolutePath)
@@ -51,6 +64,7 @@ neoForge {
 	mods {
 		gendustry {
 			sourceSet sourceSets.main
+			sourceSet sourceSets.gametest
 		}
 	}
 }
@@ -90,6 +104,8 @@ repositories {
 }
 
 configurations {
+	gametestImplementation.extendsFrom implementation
+	gametestCompileOnly.extendsFrom compileOnly
 	modkit
 	runtimeOnly.extendsFrom modkit
 	compileOnly.extendsFrom modkit

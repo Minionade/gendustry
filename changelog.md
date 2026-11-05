@@ -3,6 +3,8 @@
 - Fixed crash when placing Mutagen, Liquid DNA or Protein buckets
 - Regenerated recipe data in the 1.21.1 format
 - Butterfly DNA recipes now load only when the Forestry Butterflies add-on is installed
+- Fixed hoppers and pipes only being able to extract from 3 of the Industrial Apiary's 9 output slots
+- Fixed Mutatron not noticing the primary input being removed mid-mutation
 
 ## Gendustry 1.0.5
 - Fixed incorrect tooltip for Sieve Upgrade (#3)

@@ -95,7 +95,7 @@ public abstract class AbstractMutatronBlockEntity extends PoweredTankBlockEntity
 		if (hasMutation()) {
 			if (this.inventory.getItem(MutatronInventory.SLOT_PRIMARY) != this.currentPrimary
 					|| this.inventory.getItem(MutatronInventory.SLOT_SECONDARY) != this.currentSecondary
-					|| this.currentSecondary.isEmpty()
+					|| this.currentPrimary.isEmpty()
 					|| this.currentSecondary.isEmpty()
 			) {
 				onMutationsUpdated(List.of(), ItemStack.EMPTY, ItemStack.EMPTY);
