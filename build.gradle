@@ -52,6 +52,7 @@ neoForge {
 
 		gameTestServer {
 			type = "gameTestServer"
+			sourceSet = sourceSets.gametest
 			gameDirectory.set(project.layout.projectDirectory.dir('run/gametest'))
 			systemProperty 'neoforge.enabledGameTestNamespaces', 'gendustry'
 		}
