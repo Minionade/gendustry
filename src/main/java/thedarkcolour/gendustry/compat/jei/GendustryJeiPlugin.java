@@ -1,10 +1,13 @@
 package thedarkcolour.gendustry.compat.jei;
 
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeManager;
 
-import forestry.core.engine.genetics.mutations.MutationRecipe;
+import forestry.api.IForestryApi;
 import forestry.core.platform.client.ClientsideCode;
 import forestry.core.platform.util.RecipeUtils;
 
@@ -73,11 +76,19 @@ public class GendustryJeiPlugin implements IModPlugin {
 
 	@Override
 	public void registerGuiHandlers(IGuiHandlerRegistration registration) {
+		// Forestry's JEI display wrapper is distinct from its data-driven mutation recipe.
+		// Match the category IDs so this also works across Forestry wrapper changes.
+		Set<ResourceLocation> mutationIds = IForestryApi.INSTANCE.getGeneticManager().getSpeciesTypes().stream()
+				.map(type -> type.id().withSuffix("_mutations"))
+				.collect(Collectors.toSet());
 		RecipeType<?>[] mutationTypes = registration.getJeiHelpers().getAllRecipeTypes()
-				.filter(type -> type.getRecipeClass() == MutationRecipe.class)
+				.filter(type -> mutationIds.contains(type.getUid()))
 				.toArray(RecipeType[]::new);
 
-		registration.addRecipeClickArea(MutatronScreen.class, 68, 38, 55, 18, mutationTypes);
+		// JEI throws when a click area tries to open an empty list of recipe types.
+		if (mutationTypes.length > 0) {
+			registration.addRecipeClickArea(MutatronScreen.class, 68, 38, 55, 18, mutationTypes);
+		}
 		registration.addGuiContainerHandler(ProducerScreen.class, new ProducerGuiContainerHandler());
 	}
 }
