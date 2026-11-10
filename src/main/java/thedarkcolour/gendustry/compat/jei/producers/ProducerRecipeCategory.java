@@ -46,6 +46,7 @@ public abstract class ProducerRecipeCategory<T extends ProcessorRecipe> extends 
 
 	@Override
 	public void draw(T recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics graphics, double mouseX, double mouseY) {
+		super.draw(recipe, recipeSlotsView, graphics, mouseX, mouseY);
 		this.arrow.draw(graphics, 35, 23);
 	}
 
