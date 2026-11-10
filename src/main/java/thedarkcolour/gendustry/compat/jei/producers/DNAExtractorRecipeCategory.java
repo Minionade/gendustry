@@ -37,7 +37,9 @@ public class DNAExtractorRecipeCategory extends ProducerRecipeCategory<DnaRecipe
 
 	@Override
 	public void setRecipe(IRecipeLayoutBuilder builder, DnaRecipe recipe, IFocusGroup iFocusGroup) {
-		builder.addSlot(RecipeIngredientRole.INPUT, 1, 23).addItemStack(recipe.getSpeciesType().getDefaultSpecies().createStack(recipe.getStage()));
+		builder.addSlot(RecipeIngredientRole.INPUT, 1, 23).addItemStacks(recipe.getSpeciesType().getAllSpecies().stream()
+				.map(species -> species.createStack(recipe.getStage()))
+				.toList());
 		addFluidTank(builder, GFluids.LIQUID_DNA.fluid(), recipe.getAmount());
 		builder.addSlot(RecipeIngredientRole.INPUT, 51, 1).addItemStack(GItems.RESOURCE.item(GendustryResourceType.LABWARE).getDefaultInstance()).addRichTooltipCallback((recipeSlotView, tooltip) -> {
 			tooltip.add(Component.translatable("gen.for.chance", 10).withStyle(ChatFormatting.AQUA));
