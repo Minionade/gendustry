@@ -95,37 +95,31 @@ public class GeneticTemplateRecipe extends CustomRecipe {
 
 		for (int i = 0; i < container.size(); ++i) {
 			ItemStack stack = container.getItem(i);
-
-			if (stack.isEmpty()) {
-				continue;
-			}
-			if (stack.is(GItems.GENE_SAMPLE.item())) {
+			if (stack.isEmpty()) continue;
+			if (stack.is(GItems.GENETIC_TEMPLATE.item()) || stack.is(GItems.RESOURCE.item(GendustryResourceType.BLANK_GENETIC_TEMPLATE))) {
+				if (!template.isEmpty()) return ItemStack.EMPTY;
+				template = stack;
+			} else if (stack.is(GItems.GENE_SAMPLE.item())) {
 				IChromosome<?> chromosome = GeneSampleItem.getChromosome(stack);
 				Allele<?> allele = GeneSampleItem.getAllele(stack);
 				if (chromosome == null || allele == null) return ItemStack.EMPTY;
-
+				if (type == null) type = SpeciesTypeItem.getSpeciesType(stack);
 				samples.put(chromosome, allele);
-
-				if (type == null) {
-					type = SpeciesTypeItem.getSpeciesType(stack);
-				}
-			} else if (stack.is(GItems.GENETIC_TEMPLATE.item()) || stack.is(GItems.RESOURCE.item(GendustryResourceType.BLANK_GENETIC_TEMPLATE))) {
-				if (!template.isEmpty()) {
-					return ItemStack.EMPTY;
-				} else {
-					template = stack;
-				}
 			}
 		}
 
 		if (!template.isEmpty() && !samples.isEmpty() && type != null) {
 			ItemStack result = template.is(GItems.GENETIC_TEMPLATE.item()) ? template.copyWithCount(1) : new ItemStack(GItems.GENETIC_TEMPLATE);
-
+			IdentityHashMap<IChromosome<?>, Allele<?>> combined = new IdentityHashMap<>();
+			if (template.is(GItems.GENETIC_TEMPLATE.item())) {
+				combined.putAll(GeneticTemplateItem.getAlleles(template));
+			}
+			combined.putAll(samples);
 			SpeciesTypeItem.setSpeciesType(result, type);
-			GeneticTemplateItem.addAlleles(result, samples);
-
+			GeneticTemplateItem.addAlleles(result, combined);
 			return result;
 		}
+
 		return ItemStack.EMPTY;
 	}
 

@@ -1,3 +1,6 @@
+## Gendustry 1.0.11
+- Fixed a bug where adding a gene sample overwrote all existing genes in a genetic template
+
 ## Gendustry 1.0.9
 - Updated Forestry: Community Edition support to alpha9 while retaining compatibility with alpha8
 
