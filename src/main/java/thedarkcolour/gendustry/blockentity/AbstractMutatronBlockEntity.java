@@ -126,7 +126,19 @@ public abstract class AbstractMutatronBlockEntity extends PoweredTankBlockEntity
 			}
 
 			// Check if mutations are possible
-			List<IMutation<ISpecies<?>>> mutations = IForestryApi.INSTANCE.getGeneticManager().getMutations(primary.getType()).getCombinations(primary.getSpecies(), secondary.getSpecies());
+			List<IMutation<ISpecies<?>>> mutations =
+				IForestryApi.INSTANCE.getGeneticManager()
+					.getMutations(primary.getType())
+					.getAllMutations()
+					.stream()
+					.filter(mutation ->
+						(mutation.getFirstParent().equals(primary.getSpecies())
+							&& mutation.getSecondParent().equals(secondary.getSpecies()))
+							||
+							(mutation.getFirstParent().equals(secondary.getSpecies())
+								&& mutation.getSecondParent().equals(primary.getSpecies()))
+					)
+					.toList();
 			boolean noMutations = mutations.isEmpty();
 			errors.setCondition(noMutations, GendustryError.NO_MUTATIONS);
 
