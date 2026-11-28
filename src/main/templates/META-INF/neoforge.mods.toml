@@ -17,28 +17,28 @@ license="GNU GPLv3"
 
 [[dependencies.gendustry]]
 	modId="neoforge"
-	mandatory=true
+    type="required"
 	versionRange="${neoForgeVersionRange}"
 	ordering="NONE"
 	side="BOTH"
 
 [[dependencies.gendustry]]
 	modId="patchouli"
-	mandatory=true
+    type="required"
 	versionRange="${patchouliVersionRange}"
 	ordering="NONE"
 	side="BOTH"
 
 [[dependencies.gendustry]]
 	modId="forestry"
-	mandatory=true
+    type="required"
 	versionRange="${forestryVersionRange}"
 	ordering="NONE"
 	side="BOTH"
 
 [[dependencies.gendustry]]
 	modId="jei"
-	mandatory=false
+    type="optional"
 	versionRange="${jeiVersionRange}"
 	ordering="NONE"
 	side="CLIENT"
